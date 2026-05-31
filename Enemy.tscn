@@ -1,13 +1,13 @@
 [gd_scene format=3 uid="uid://c6vm6jqxqst6m"]
 
-[ext_resource type="Script" uid="uid://cxv5fejk1fxf2" path="res://enemie_2.gd" id="1_34t7x"]
+[ext_resource type="Script" uid="uid://cxv5fejk1fxf2" path="res://Enemy.gd" id="1_34t7x"]
 [ext_resource type="Texture2D" uid="uid://db24iexo82umt" path="res://img/Enemy.png" id="2_knsol"]
-[ext_resource type="PackedScene" uid="uid://bo57jt68c3sux" path="res://bullet.tscn" id="2_mmjhk"]
+[ext_resource type="PackedScene" uid="uid://bo57jt68c3sux" path="res://Bullet.tscn" id="2_mmjhk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ov13o"]
 size = Vector2(42, 42)
 
-[node name="Enemie2" type="CharacterBody2D" unique_id=2068710603]
+[node name="Enemy2" type="CharacterBody2D" unique_id=2068710603]
 script = ExtResource("1_34t7x")
 bullet_scene = ExtResource("2_mmjhk")
 
@@ -17,7 +17,7 @@ bullet_scene = ExtResource("2_mmjhk")
 position = Vector2(0, -31)
 shape = SubResource("RectangleShape2D_ov13o")
 
-[node name="Enemie" type="Sprite2D" parent="." unique_id=376915531]
+[node name="Enemy" type="Sprite2D" parent="." unique_id=376915531]
 position = Vector2(0, -31)
 scale = Vector2(1.691, 1.691)
 texture = ExtResource("2_knsol")

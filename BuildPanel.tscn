@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cvh6eqa7tmf5d"]
 
-[ext_resource type="Script" uid="uid://c47h7xdw8rakt" path="res://build_panel.gd" id="1_eml3h"]
+[ext_resource type="Script" uid="uid://c47h7xdw8rakt" path="res://BuildPanel.gd" id="1_eml3h"]
 [ext_resource type="Texture2D" uid="uid://b2qe7mfhsthni" path="res://img/FactoryBlue.png" id="2_7whta"]
 [ext_resource type="Texture2D" uid="uid://cf8jgcmh3a613" path="res://img/Tree1.png" id="3_mgl7e"]
 

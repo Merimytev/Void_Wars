@@ -68,7 +68,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 color = Color(0.039215688, 0.050980393, 0.101960786, 0.8784314)
-metadata/_edit_use_anchors_ = true
 
 [node name="Panel" type="PanelContainer" parent="." unique_id=772998789]
 anchors_preset = 15
@@ -84,6 +83,10 @@ custom_minimum_size = Vector2(350, 0)
 layout_mode = 2
 theme_override_constants/separation = 16
 
+[node name="HSeparator3" type="HSeparator" parent="Panel/VBoxContainer" unique_id=1160818634]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
 [node name="Title" type="Label" parent="Panel/VBoxContainer" unique_id=1728866827]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.85, 0.92, 1, 1)
@@ -91,8 +94,7 @@ theme_override_colors/font_outline_color = Color(0.1, 0.2, 0.4, 0.9)
 theme_override_constants/outline_size = 8
 theme_override_fonts/font = ExtResource("1_jje6t")
 theme_override_font_sizes/font_size = 50
-text = "Список всех сыгравших
-"
+text = "Список всех сыгравших"
 horizontal_alignment = 1
 uppercase = true
 

@@ -29,7 +29,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0, 0.019607844, 0.08627451, 0.23529412)
+color = Color(0, 0.025840001, 0.086104214, 0.23400001)
 
 [node name="CenterContainer" type="CenterContainer" parent="." unique_id=1084773975]
 anchors_preset = 15
@@ -57,7 +57,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(360, 52)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-text = "Начать игру"
+text = "Одиночная игра"
 
 [node name="Gap2" type="Control" parent="CenterContainer/VBoxContainer" unique_id=787826170]
 layout_mode = 2
@@ -66,7 +66,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(360, 52)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-text = "Загрузить"
+text = "Загрузить игру (X)"
 
 [node name="Gap3" type="Control" parent="CenterContainer/VBoxContainer" unique_id=1510692831]
 layout_mode = 2
@@ -75,19 +75,9 @@ layout_mode = 2
 custom_minimum_size = Vector2(360, 52)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-text = "Мультиплеер
-"
+text = "Мультиплеер (X)"
 
 [node name="Gap4" type="Control" parent="CenterContainer/VBoxContainer" unique_id=2126780206]
-layout_mode = 2
-
-[node name="StatsButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1701974246]
-custom_minimum_size = Vector2(360, 52)
-layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "Статистика игроков"
-
-[node name="Gap5" type="Control" parent="CenterContainer/VBoxContainer" unique_id=399013090]
 layout_mode = 2
 
 [node name="SettingsButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=343889554]
@@ -96,7 +86,24 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Настройки"
 
+[node name="Gap5" type="Control" parent="CenterContainer/VBoxContainer" unique_id=399013090]
+layout_mode = 2
+
+[node name="StatsButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1701974246]
+custom_minimum_size = Vector2(360, 52)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Статистика игроков"
+
 [node name="Gap6" type="Control" parent="CenterContainer/VBoxContainer" unique_id=673930313]
+layout_mode = 2
+
+[node name="AboutButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=113087984]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Об игре"
+
+[node name="Gap7" type="Control" parent="CenterContainer/VBoxContainer" unique_id=100602308]
 layout_mode = 2
 
 [node name="QuitButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1143757734]
@@ -105,18 +112,10 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Выйти"
 
-[node name="AboutButton" type="Button" parent="." unique_id=113087984]
-offset_left = 1696.0
-offset_top = 1004.0
-offset_right = 1896.0
-offset_bottom = 1056.0
-theme_override_font_sizes/font_size = 30
-text = "Об игре"
-
 [connection signal="pressed" from="CenterContainer/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/LoadButton" to="." method="_on_load_button_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/NetworkButton" to="." method="_on_network_button_pressed"]
-[connection signal="pressed" from="CenterContainer/VBoxContainer/StatsButton" to="." method="_on_stats_button_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/StatsButton" to="." method="_on_stats_button_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/AboutButton" to="." method="_on_about_button_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
-[connection signal="pressed" from="AboutButton" to="." method="_on_about_button_pressed"]

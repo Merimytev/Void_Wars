@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b111d2xnwtdgl" path="res://UI/UI.gd" id="1_to03m"]
 [ext_resource type="Texture2D" uid="uid://vhkpsdkaih5p" path="res://img/Mineral.png" id="2_tssxm"]
-[ext_resource type="PackedScene" uid="uid://dspiynj1g7r8r" path="res://UI/Minimap Sprites/energy_png.tscn" id="4_f1fl4"]
+[ext_resource type="PackedScene" uid="uid://dspiynj1g7r8r" path="res://UI/Minimap Sprites/EnergyPng.tscn" id="4_f1fl4"]
 [ext_resource type="FontFile" uid="uid://dvn073b5o2dwm" path="res://img/fonts/Orbit-Regular.ttf" id="4_mquok"]
 [ext_resource type="PackedScene" uid="uid://b7mr8qt8exscd" path="res://UI/MiniMap.tscn" id="5_f1fl4"]
 

@@ -271,9 +271,10 @@ func _refresh() -> void:
 		_name_label.text = "Строитель"
 		_desc_label.text = "Добывает ресурсы, строит здания"
 		if _in_build_mode:
-			_add_btn("ЗАВОД", "F", _on_factory_pressed, "Завод", FACTORY_COST)
-			_add_btn("СОЛНЕЧНАЯ\nПАНЕЛЬ", "T", _on_turret_pressed, "Солнечная панель", SOLAR_COST)
-			_add_btn("ОТМЕНА", "Esc", _on_cancel_build)
+			var sq := Vector2(150, 150)
+			_add_btn("ЗАВОД", "F", _on_factory_pressed, "Завод", FACTORY_COST, sq, 18)
+			_add_btn("СОЛНЕЧНАЯ\nПАНЕЛЬ", "T", _on_turret_pressed, "Солнечная панель", SOLAR_COST, sq, 18)
+			_add_btn("ОТМЕНА", "Esc", _on_cancel_build, "", {}, sq, 18)
 		else:
 			_add_btn("СТРОИТЬ", "B", _on_build_pressed, "", {}, BTN_SIZE * 2, 26)
 			_add_btn("РЕМОНТ", "R", _on_repair_pressed, "", {}, BTN_SIZE * 2, 26)

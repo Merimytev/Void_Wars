@@ -5,7 +5,7 @@ const BG_PATH := "res://img/Menu.png"
 
 func _on_play_button_pressed() -> void:
 	Game.reset_resources()
-	get_tree().change_scene_to_file("res://world.tscn")
+	get_tree().change_scene_to_file("res://World.tscn")
 
 func _on_load_button_pressed() -> void:
 	pass # Replace with function body.
@@ -23,4 +23,4 @@ func _on_quit_button_pressed() -> void:
 	get_tree().quit()
 
 func _on_about_button_pressed() -> void:
-	pass # Replace with function body.
+	get_tree().change_scene_to_file("res://About.tscn")

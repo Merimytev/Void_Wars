@@ -3,7 +3,7 @@ signal base_destroyed
 signal player_defeated
 signal minerals_changed(new_value: int)
 
-@onready var spawn = preload("res://Global/spawn_unit.tscn")
+@onready var spawn = preload("res://Global/SpawnUnit.tscn")
 
 var Minerals = 0
 var Energy = 0

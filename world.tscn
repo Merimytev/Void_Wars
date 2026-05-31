@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cl5sweqpos2k8"]
 
-[ext_resource type="Script" uid="uid://dyohnq4dsyhl" path="res://world.gd" id="1_1m6ml"]
+[ext_resource type="Script" uid="uid://dyohnq4dsyhl" path="res://World.gd" id="1_1m6ml"]
 [ext_resource type="Script" uid="uid://b60smdf8fypub" path="res://UI/Camera.gd" id="1_mov7x"]
 [ext_resource type="Texture2D" uid="uid://dgwblxbp3q4pv" path="res://img/River2.png" id="2_232ut"]
 [ext_resource type="PackedScene" uid="uid://p3snma5hv5o2" path="res://Units/Builder.tscn" id="2_gs7jo"]
@@ -15,9 +15,9 @@
 [ext_resource type="AudioStream" uid="uid://cewmalrtas051" path="res://Audio/OSTAmbient.wav" id="10_wwedx"]
 [ext_resource type="Texture2D" uid="uid://cf8jgcmh3a613" path="res://img/Tree1.png" id="11_biudx"]
 [ext_resource type="Texture2D" uid="uid://c5p3kc83yhxy2" path="res://img/Tree2.png" id="12_xcoiw"]
-[ext_resource type="Script" uid="uid://bynbwbp1xugn1" path="res://enemy_ai.gd" id="16_2u3nc"]
-[ext_resource type="PackedScene" uid="uid://dv13ew4tmmp7j" path="res://enemy_base.tscn" id="16_ikiii"]
-[ext_resource type="PackedScene" uid="uid://c6vm6jqxqst6m" path="res://enemie_2.tscn" id="18_ikiii"]
+[ext_resource type="Script" uid="uid://bynbwbp1xugn1" path="res://EnemyAi.gd" id="16_2u3nc"]
+[ext_resource type="PackedScene" uid="uid://dv13ew4tmmp7j" path="res://EnemyBase.tscn" id="16_ikiii"]
+[ext_resource type="PackedScene" uid="uid://c6vm6jqxqst6m" path="res://Enemy.tscn" id="18_ikiii"]
 
 [sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_78cb2"]
 stream_count = 2

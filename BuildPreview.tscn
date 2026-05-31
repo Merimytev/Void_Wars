@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bq6bnx6y0f7bj"]
 
-[ext_resource type="Script" uid="uid://ib7nwdia6ht6" path="res://build_preview.gd" id="1_db443"]
+[ext_resource type="Script" uid="uid://ib7nwdia6ht6" path="res://BuildPreview.gd" id="1_db443"]
 [ext_resource type="PackedScene" uid="uid://bf3b4l314uo5" path="res://Buildings/Factory.tscn" id="2_ffis0"]
 [ext_resource type="Texture2D" uid="uid://b2qe7mfhsthni" path="res://img/FactoryBlue.png" id="3_cbbdn"]
 [ext_resource type="PackedScene" uid="uid://bvgpipxsk31dx" path="res://Buildings/SolarPanel.tscn" id="3_ffis0"]

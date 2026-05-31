@@ -1,0 +1,113 @@
+[gd_scene format=3 uid="uid://3xpodutiwa7i"]
+
+[ext_resource type="Script" uid="uid://6caofcp48wyt" path="res://About.gd" id="1_8epvc"]
+[ext_resource type="FontFile" uid="uid://dvn073b5o2dwm" path="res://img/fonts/Orbit-Regular.ttf" id="3_ynqq3"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_y7g8n"]
+font = ExtResource("3_ynqq3")
+font_size = 28
+
+[sub_resource type="StyleBoxFlat" id="btn_normal"]
+bg_color = Color(0.09, 0.12, 0.2, 0.9)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.28, 0.42, 0.68, 0.8)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="btn_pressed"]
+bg_color = Color(0.06, 0.08, 0.14, 0.97)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.3, 0.55, 0.9, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="btn_hover"]
+bg_color = Color(0.15, 0.21, 0.36, 0.97)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.5, 0.72, 1, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxEmpty" id="btn_focus"]
+
+[node name="About" type="CanvasLayer" unique_id=1695710479]
+script = ExtResource("1_8epvc")
+
+[node name="Dim" type="ColorRect" parent="." unique_id=797394503]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0.025840001, 0.086104214, 0.757)
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1084773975]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=945564709]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="AboutText" type="Label" parent="CenterContainer/VBoxContainer" unique_id=540894050]
+custom_minimum_size = Vector2(1400, 0)
+layout_mode = 2
+text = "Об игре
+
+Void Wars — это стратегия в реальном времени, где каждое решение определяет судьбу вашего поселения.
+Вы берёте под контроль базу на краю галактики: ваша цель — добывать минералы и энергию, возводить здания, формировать армии и уничтожать врага раньше, чем он уничтожит вас. Побеждает не тот, кто атакует первым, — а тот, кто думает быстрее.
+
+Глобальная статистика
+
+Каждая сыгранная партия фиксируется в облачном хранилище Supabase. Имя игрока, собранные ресурсы, продолжительность матча, количество уничтоженных противников — всё сохраняется автоматически и доступно с любого устройства в любой точке мира.
+Это возможно благодаря тому, что и API, и база данных со статистикой развёрнуты в облаке и работают постоянно. В роли API между игрой и базой данных выступает FastAPI.
+
+Версия — 2.0
+Авторы: 
+Литус Владислав П4В, Лиховидов Андрей П4В"
+label_settings = SubResource("LabelSettings_y7g8n")
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Gap" type="Control" parent="CenterContainer/VBoxContainer" unique_id=1121329704]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1269592168]
+custom_minimum_size = Vector2(200, 44)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.8)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("3_ynqq3")
+theme_override_font_sizes/font_size = 34
+theme_override_styles/normal = SubResource("btn_normal")
+theme_override_styles/pressed = SubResource("btn_pressed")
+theme_override_styles/hover = SubResource("btn_hover")
+theme_override_styles/focus = SubResource("btn_focus")
+text = "Назад"
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

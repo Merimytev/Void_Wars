@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-var server_url = "http://127.0.0.1:5000"
+var server_url = "https://void-wars-players-statistics-80327b04.fastapicloud.dev"
 
 @onready var name_label: Label = $Panel/VBoxContainer/NameLabel
 @onready var minerals_label: Label = $Panel/VBoxContainer/MineralsLabel
@@ -14,8 +14,8 @@ func _ready() -> void:
 		return
 	var http_request = HTTPRequest.new()
 	add_child(http_request)
-	http_request.request(server_url + "/get_statistics")
 	http_request.request_completed.connect(_on_request_completed)
+	http_request.request(server_url + "/statistics/")
 
 func _on_request_completed(
 		_result: int, response_code: int, _headers: Array, body: PackedByteArray

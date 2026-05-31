@@ -27,6 +27,7 @@ const ASPECT_RATIOS: Array = ["16:9", "16:10", "4:3", "21:9", "5:4"]
 var fullscreen: bool = true
 var current_aspect: String = "16:9"
 var current_resolution: Vector2i = Vector2i(1920, 1080)
+var music_volume: float = 1.0
 
 func _ready() -> void:
 	_load_settings()
@@ -43,6 +44,9 @@ func apply_settings() -> void:
 		window.mode = Window.MODE_WINDOWED
 		window.size = current_resolution
 		_center_window()
+	var bus := AudioServer.get_bus_index("Music")
+	if bus >= 0:
+		AudioServer.set_bus_volume_db(bus, linear_to_db(music_volume))
 
 func save_settings() -> void:
 	var config = ConfigFile.new()
@@ -50,6 +54,7 @@ func save_settings() -> void:
 	config.set_value("display", "aspect", current_aspect)
 	config.set_value("display", "res_width", current_resolution.x)
 	config.set_value("display", "res_height", current_resolution.y)
+	config.set_value("audio", "music_volume", music_volume)
 	config.save(CONFIG_PATH)
 
 func _load_settings() -> void:
@@ -65,6 +70,7 @@ func _load_settings() -> void:
 	var w = config.get_value("display", "res_width", 1920)
 	var h = config.get_value("display", "res_height", 1080)
 	current_resolution = Vector2i(w, h)
+	music_volume = config.get_value("audio", "music_volume", 1.0)
 
 func _center_window() -> void:
 	var screen_size = DisplayServer.screen_get_size()
@@ -75,13 +81,13 @@ func _detect_aspect_ratio(size: Vector2i) -> String:
 	var ratio = float(size.x) / float(size.y)
 	if abs(ratio - 16.0 / 9.0) < 0.05:
 		return "16:9"
-	elif abs(ratio - 16.0 / 10.0) < 0.05:
+	if abs(ratio - 16.0 / 10.0) < 0.05:
 		return "16:10"
-	elif abs(ratio - 4.0 / 3.0) < 0.05:
+	if abs(ratio - 4.0 / 3.0) < 0.05:
 		return "4:3"
-	elif abs(ratio - 21.0 / 9.0) < 0.1:
+	if abs(ratio - 21.0 / 9.0) < 0.1:
 		return "21:9"
-	elif abs(ratio - 5.0 / 4.0) < 0.05:
+	if abs(ratio - 5.0 / 4.0) < 0.05:
 		return "5:4"
 	return "16:9"
 

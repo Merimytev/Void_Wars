@@ -3,83 +3,112 @@
 [ext_resource type="Script" uid="uid://dwd4glll4ts1e" path="res://UI/WinPanel.gd" id="1_4en8n"]
 [ext_resource type="FontFile" uid="uid://dvn073b5o2dwm" path="res://img/fonts/Orbit-Regular.ttf" id="2_vo7cj"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_vo7cj"]
-font_size = 22
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vo7cj"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yak67"]
-bg_color = Color(0.74978, 0.74978, 0.74978, 1)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dwtim"]
-bg_color = Color(0.758192, 0.758192, 0.758191, 1)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_al0eh"]
+bg_color = Color(0.33361515, 0.38109186, 0.48677072, 0.90000004)
+border_color = Color(0.5657284, 0.6799758, 0.8433892, 0.8)
+corner_detail = 5
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f3ck2"]
-bg_color = Color(0.821789, 0.821789, 0.821788, 1)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
+bg_color = Color(0.2716998, 0.3133042, 0.4100209, 0.97)
+border_color = Color(0.58383155, 0.76737565, 0.95468724, 1)
+corner_detail = 5
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_al0eh"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dwtim"]
+bg_color = Color(0.42358288, 0.49560964, 0.6342527, 0.97)
+border_color = Color(0.735357, 0.86504203, 1, 1)
+corner_detail = 5
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yak67"]
 
 [node name="WinPanel" type="CanvasLayer" unique_id=688804667]
 process_mode = 3
 script = ExtResource("1_4en8n")
 
-[node name="Menu" type="Panel" parent="." unique_id=378358182]
-offset_left = 416.0
-offset_top = 192.0
-offset_right = 734.0
-offset_bottom = 384.0
+[node name="Dim" type="ColorRect" parent="." unique_id=880890398]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0.025840001, 0.086104214, 0.4)
 
-[node name="Label" type="Label" parent="Menu" unique_id=1753399880]
-layout_mode = 0
-offset_left = 80.0
-offset_top = 8.0
-offset_right = 240.0
-offset_bottom = 39.0
-text = "Вы победили!"
-label_settings = SubResource("LabelSettings_vo7cj")
+[node name="Panel" type="PanelContainer" parent="." unique_id=234441470]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_vo7cj")
 
-[node name="PlayerName" type="TextEdit" parent="Menu" unique_id=985757337]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.503
-anchor_top = 0.458
-anchor_right = 0.503
-anchor_bottom = 0.458
-offset_left = -87.954
-offset_top = -31.936
-offset_right = 88.046
-offset_bottom = 24.064
-placeholder_text = "  Введите ваше имя"
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel" unique_id=249099170]
+custom_minimum_size = Vector2(420, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 16
 
-[node name="Menu" type="Button" parent="Menu" unique_id=1604744567]
-layout_mode = 0
-anchor_left = 0.5
-anchor_top = 0.812
-anchor_right = 0.5
-anchor_bottom = 0.812
-offset_left = -55.0
-offset_top = -19.904
-offset_right = 57.0
-offset_bottom = 20.096
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+[node name="Status" type="Label" parent="Panel/VBoxContainer" unique_id=939376828]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.92, 1, 1)
+theme_override_colors/font_outline_color = Color(0.1, 0.2, 0.4, 0.9)
 theme_override_constants/outline_size = 8
 theme_override_fonts/font = ExtResource("2_vo7cj")
-theme_override_font_sizes/font_size = 20
-theme_override_styles/normal = SubResource("StyleBoxFlat_yak67")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_dwtim")
-theme_override_styles/hover = SubResource("StyleBoxFlat_f3ck2")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_al0eh")
-text = "Выйти"
+theme_override_font_sizes/font_size = 50
+text = "Вы победили!"
+horizontal_alignment = 1
+uppercase = true
 
-[connection signal="pressed" from="Menu/Menu" to="." method="_on_menu_pressed"]
+[node name="HSeparator" type="HSeparator" parent="Panel/VBoxContainer" unique_id=1554216104]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="PlayerName" type="TextEdit" parent="Panel/VBoxContainer" unique_id=1466224047]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+size_flags_horizontal = 5
+placeholder_text = "Введите ваше имя"
+
+[node name="HSeparator2" type="HSeparator" parent="Panel/VBoxContainer" unique_id=1933329331]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="Stats" type="Button" parent="Panel/VBoxContainer" unique_id=1075584169]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+size_flags_horizontal = 5
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("2_vo7cj")
+theme_override_font_sizes/font_size = 34
+theme_override_styles/normal = SubResource("StyleBoxFlat_al0eh")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_f3ck2")
+theme_override_styles/hover = SubResource("StyleBoxFlat_dwtim")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_yak67")
+text = "Посмотреть статистику"
+
+[node name="Gap" type="Control" parent="Panel/VBoxContainer" unique_id=315875823]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="Menu" type="Button" parent="Panel/VBoxContainer" unique_id=992584783]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+size_flags_horizontal = 5
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("2_vo7cj")
+theme_override_font_sizes/font_size = 34
+theme_override_styles/normal = SubResource("StyleBoxFlat_al0eh")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_f3ck2")
+theme_override_styles/hover = SubResource("StyleBoxFlat_dwtim")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_yak67")
+text = "В меню"
+
+[connection signal="pressed" from="Panel/VBoxContainer/Stats" to="." method="_on_stats_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/Menu" to="." method="_on_menu_pressed"]

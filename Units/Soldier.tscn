@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bwibvlddj7w6v" path="res://Units/Soldier.gd" id="1_byptv"]
 [ext_resource type="Texture2D" uid="uid://bjhhjr8muq6xh" path="res://img/Soldier.png" id="1_mbpm8"]
-[ext_resource type="PackedScene" uid="uid://cs4o7p815wa73" path="res://solder_bullet.tscn" id="2_wnpey"]
+[ext_resource type="PackedScene" uid="uid://cs4o7p815wa73" path="res://SolderBullet.tscn" id="2_wnpey"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_byptv"]
 size = Vector2(42, 42)

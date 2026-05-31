@@ -14,7 +14,7 @@ extends CharacterBody2D
 
 # ═══ Узлы ════════════════════════════════════════════════════════
 @onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
-@onready var sprite: Sprite2D = $Enemie
+@onready var sprite: Sprite2D = $Enemy
 @onready var health_bar: ProgressBar = $Healthbar
 
 # ═══ FSM ═════════════════════════════════════════════════════════
@@ -266,4 +266,5 @@ func take_damage(amount: float) -> void:
 
 func _die() -> void:
 	state = State.DEAD
+	Game.killed_count += 1
 	queue_free()

@@ -67,7 +67,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.04, 0.05, 0.1, 0.88)
+mouse_filter = 2
+color = Color(0.039215688, 0.050980393, 0.101960786, 0.8784314)
+metadata/_edit_use_anchors_ = true
 
 [node name="Panel" type="PanelContainer" parent="." unique_id=1547999791]
 anchors_preset = 15
