@@ -57,21 +57,32 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0.025840001, 0.086104214, 0.757)
 
-[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1084773975]
+[node name="CenterContainer" type="MarginContainer" parent="." unique_id=1069835959]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+theme_override_constants/margin_left = 80
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 80
+theme_override_constants/margin_bottom = 40
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=945564709]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="AboutText" type="Label" parent="CenterContainer/VBoxContainer" unique_id=540894050]
-custom_minimum_size = Vector2(1400, 0)
+[node name="ScrollContainer" type="ScrollContainer" parent="CenterContainer/VBoxContainer" unique_id=519329180]
 layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="AboutText" type="Label" parent="CenterContainer/VBoxContainer/ScrollContainer" unique_id=540894050]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
 text = "Об игре
 
 Void Wars — это стратегия в реальном времени, где каждое решение определяет судьбу вашего поселения.
