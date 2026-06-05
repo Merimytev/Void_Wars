@@ -22,6 +22,7 @@ config/features=PackedStringArray("4.6", "Forward Plus")
 
 Game="*res://Global/Game.gd"
 Settings="*res://Global/Settings.gd"
+HighLevelNetworkHandler="*uid://b8ogkwj8wmww5"
 
 [display]
 

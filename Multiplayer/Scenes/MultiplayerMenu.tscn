@@ -1,0 +1,157 @@
+[gd_scene format=3 uid="uid://dgb546xw0jsra"]
+
+[ext_resource type="Script" uid="uid://btpog5xld6cof" path="res://Multiplayer/Scripts/MultiplayerMenu.gd" id="1_78vj0"]
+[ext_resource type="FontFile" uid="uid://dvn073b5o2dwm" path="res://img/fonts/Orbit-Regular.ttf" id="2_e0y82"]
+
+[sub_resource type="StyleBoxFlat" id="btn_normal"]
+bg_color = Color(0.09, 0.12, 0.2, 0.9)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.28, 0.42, 0.68, 0.8)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="btn_pressed"]
+bg_color = Color(0.06, 0.08, 0.14, 0.97)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.3, 0.55, 0.9, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="btn_hover"]
+bg_color = Color(0.15, 0.21, 0.36, 0.97)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.5, 0.72, 1, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxEmpty" id="btn_focus"]
+
+[node name="Multiplayer Menu" type="CanvasLayer" unique_id=1695710479]
+script = ExtResource("1_78vj0")
+
+[node name="Dim" type="ColorRect" parent="." unique_id=797394503]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0.025840001, 0.086104214, 0.757)
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1084773975]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=945564709]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Choice" type="Label" parent="CenterContainer/VBoxContainer" unique_id=1488636775]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.92, 1, 1)
+theme_override_colors/font_outline_color = Color(0.1, 0.2, 0.4, 0.9)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("2_e0y82")
+theme_override_font_sizes/font_size = 50
+text = "Выберите действие"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="HSep" type="HSeparator" parent="CenterContainer/VBoxContainer" unique_id=19240373]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="HostButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=412075705]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.8)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("2_e0y82")
+theme_override_font_sizes/font_size = 34
+theme_override_styles/normal = SubResource("btn_normal")
+theme_override_styles/pressed = SubResource("btn_pressed")
+theme_override_styles/hover = SubResource("btn_hover")
+theme_override_styles/focus = SubResource("btn_focus")
+text = "Создать сетевую игру"
+
+[node name="Gap" type="Control" parent="CenterContainer/VBoxContainer" unique_id=787826170]
+layout_mode = 2
+
+[node name="HSep2" type="HSeparator" parent="CenterContainer/VBoxContainer" unique_id=1852813224]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="IPInput" type="LineEdit" parent="CenterContainer/VBoxContainer" unique_id=1057814308]
+custom_minimum_size = Vector2(640, 44)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_e0y82")
+theme_override_font_sizes/font_size = 18
+placeholder_text = "Введите IP адрес и порт хоста (например: 192.168.1.100:42070)"
+
+[node name="Gap2" type="Control" parent="CenterContainer/VBoxContainer" unique_id=581881863]
+layout_mode = 2
+
+[node name="ConnectButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=603831582]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.8)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("2_e0y82")
+theme_override_font_sizes/font_size = 34
+theme_override_styles/normal = SubResource("btn_normal")
+theme_override_styles/pressed = SubResource("btn_pressed")
+theme_override_styles/hover = SubResource("btn_hover")
+theme_override_styles/focus = SubResource("btn_focus")
+text = "Присоединиться к сетевой игре"
+
+[node name="HSep3" type="HSeparator" parent="CenterContainer/VBoxContainer" unique_id=1622303717]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1985425230]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.8)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("2_e0y82")
+theme_override_font_sizes/font_size = 34
+theme_override_styles/normal = SubResource("btn_normal")
+theme_override_styles/pressed = SubResource("btn_pressed")
+theme_override_styles/hover = SubResource("btn_hover")
+theme_override_styles/focus = SubResource("btn_focus")
+text = "Назад"
+
+[node name="StatusLabel" type="Label" parent="CenterContainer/VBoxContainer" unique_id=951731775]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_e0y82")
+theme_override_font_sizes/font_size = 22
+horizontal_alignment = 1
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/HostButton" to="." method="_on_host_button_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/ConnectButton" to="." method="_on_connect_button_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
