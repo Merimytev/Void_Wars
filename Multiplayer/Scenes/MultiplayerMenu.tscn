@@ -95,9 +95,6 @@ theme_override_styles/hover = SubResource("btn_hover")
 theme_override_styles/focus = SubResource("btn_focus")
 text = "Создать сетевую игру"
 
-[node name="Gap" type="Control" parent="CenterContainer/VBoxContainer" unique_id=787826170]
-layout_mode = 2
-
 [node name="HSep2" type="HSeparator" parent="CenterContainer/VBoxContainer" unique_id=1852813224]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2

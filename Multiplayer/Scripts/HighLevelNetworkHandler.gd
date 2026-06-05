@@ -6,7 +6,7 @@ var peer: ENetMultiplayerPeer
 
 func start_server() -> Error:
 	peer = ENetMultiplayerPeer.new()
-	var err := peer.create_server(PORT)
+	var err: Error = peer.create_server(PORT)
 	if err != OK:
 		return err
 	multiplayer.multiplayer_peer = peer
@@ -15,7 +15,7 @@ func start_server() -> Error:
 
 func start_client(ip: String) -> Error:
 	peer = ENetMultiplayerPeer.new()
-	var err := peer.create_client(ip, PORT)
+	var err: Error = peer.create_client(ip, PORT)
 	if err != OK:
 		return err
 	multiplayer.multiplayer_peer = peer
@@ -23,6 +23,10 @@ func start_client(ip: String) -> Error:
 	return OK
 
 func disconnect_peer() -> void:
+	if multiplayer.peer_disconnected.is_connected(_on_peer_disconnected):
+		multiplayer.peer_disconnected.disconnect(_on_peer_disconnected)
+	if multiplayer.server_disconnected.is_connected(_on_server_disconnected):
+		multiplayer.server_disconnected.disconnect(_on_server_disconnected)
 	if peer:
 		peer.close()
 	multiplayer.multiplayer_peer = null

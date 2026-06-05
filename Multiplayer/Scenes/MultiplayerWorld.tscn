@@ -4,12 +4,10 @@
 [ext_resource type="Texture2D" uid="uid://dupgkjwewdblv" path="res://img/MainTile.png" id="2_vtt1e"]
 [ext_resource type="Script" uid="uid://b60smdf8fypub" path="res://UI/Camera.gd" id="3_4gt4c"]
 [ext_resource type="PackedScene" uid="uid://01hq333aoves" path="res://UI/UI.tscn" id="4_150dk"]
-[ext_resource type="PackedScene" uid="uid://p3snma5hv5o2" path="res://Units/Builder.tscn" id="5_5yegy"]
 [ext_resource type="AudioStream" uid="uid://bdv0sh2ekso8v" path="res://Audio/OSTDynamic.wav" id="6_pqds0"]
 [ext_resource type="AudioStream" uid="uid://cewmalrtas051" path="res://Audio/OSTAmbient.wav" id="7_50r15"]
 [ext_resource type="Texture2D" uid="uid://dgwblxbp3q4pv" path="res://img/River2.png" id="8_mwjap"]
 [ext_resource type="Texture2D" uid="uid://j77p2nlw752i" path="res://img/River1.png" id="9_5cmft"]
-[ext_resource type="PackedScene" uid="uid://bndks45jl8sp1" path="res://Units/Enemy.tscn" id="10_150dk"]
 [ext_resource type="PackedScene" uid="uid://ch3mbfpk7bfqu" path="res://World objects/Mineral.tscn" id="10_lg4sp"]
 [ext_resource type="Texture2D" uid="uid://cf8jgcmh3a613" path="res://img/Tree1.png" id="11_4sdov"]
 [ext_resource type="Texture2D" uid="uid://c5p3kc83yhxy2" path="res://img/Tree2.png" id="12_y5tr3"]
@@ -154,8 +152,6 @@ position = Vector2(2190, -64)
 
 [node name="Mineral8" parent="Objects" unique_id=692821786 instance=ExtResource("10_lg4sp")]
 position = Vector2(1950, -204)
-
-[node name="Enemie" parent="Objects" unique_id=1621515977 instance=ExtResource("10_150dk")]
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=775227512]
 navigation_polygon = SubResource("NavigationPolygon_hiqwa")
@@ -631,9 +627,3 @@ _spawnable_scenes = PackedStringArray("uid://bu8bp1uj6s7en")
 spawn_path = NodePath("..")
 script = ExtResource("15_vtt1e")
 network_player = ExtResource("16_4gt4c")
-
-[node name="Units" type="Node2D" parent="." unique_id=1238924270]
-y_sort_enabled = true
-
-[node name="Builder" parent="Units" unique_id=1741133992 instance=ExtResource("5_5yegy")]
-position = Vector2(-79, 256)
