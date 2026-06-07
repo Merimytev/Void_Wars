@@ -11,8 +11,8 @@ func _ready() -> void:
 	move_child(bottom_bar, 0)
 
 func _process(_delta: float) -> void:
-	minerals_label.text = "Minerals: " + str(Game.Minerals)
-	energy_label.text = "Energy: " + str(Game.Energy)
+	minerals_label.text = "Минералы:" + str(Game.Minerals)
+	energy_label.text = "Энергия:" + str(Game.Energy)
 
 func _on_menu_pressed() -> void:
 	print("Игрок вышел из игры без отправки данных")

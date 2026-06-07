@@ -87,6 +87,8 @@ func _finish_spawn() -> void:
 func _unhandled_input(event):
 	if event.is_action_pressed("LeftClick"):
 		if is_hovered:
+			if multiplayer.multiplayer_peer != null and !multiplayer.is_server():
+				return
 			if is_selected:
 				is_selected = false
 				_close_spawn_menu()

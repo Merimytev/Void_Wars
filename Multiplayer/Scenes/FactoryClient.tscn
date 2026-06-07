@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cw0q0amquu33r"]
 
-[ext_resource type="Script" path="res://Buildings/FactoryClient.gd" id="1_u0ou1"]
-[ext_resource type="Texture2D" uid="uid://e2v3kbbkj1c0" path="res://img/Client/FactoryGreen.png" id="2_8t0ml"]
+[ext_resource type="Script" uid="uid://cukdvi2fk3taw" path="res://Buildings/FactoryClient.gd" id="1_u0ou1"]
+[ext_resource type="Texture2D" uid="uid://cr2ubjq6wkdww" path="res://img/Client/FactoryClient.png" id="2_u0ou1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k00oa"]
 size = Vector2(60, 40.5)
@@ -26,7 +26,7 @@ position = Vector2(0, 8.25)
 shape = SubResource("RectangleShape2D_k00oa")
 
 [node name="Factory" type="Sprite2D" parent="." unique_id=299006063]
-texture = ExtResource("2_8t0ml")
+texture = ExtResource("2_u0ou1")
 
 [node name="Selected" type="Panel" parent="." unique_id=96523576]
 offset_left = -33.0

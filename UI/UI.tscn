@@ -45,40 +45,51 @@ corner_radius_bottom_left = 4
 script = ExtResource("1_to03m")
 
 [node name="Panel" type="Panel" parent="." unique_id=247867535]
+offset_left = 6.0
+offset_top = 6.0
+offset_right = 6.0
+offset_bottom = 6.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_nmrsi")
 
 [node name="Minerals" type="Label" parent="." unique_id=1582829859]
-offset_left = 34.0
-offset_right = 74.0
-offset_bottom = 24.0
-theme_override_constants/outline_size = 5
+offset_left = 46.0
+offset_top = 6.0
+offset_right = 846.0
+offset_bottom = 56.0
+theme_override_colors/font_color = Color(0.75, 0.85, 1, 1)
+theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("4_mquok")
+theme_override_font_sizes/font_size = 34
 text = "test"
 
 [node name="MineralsPNG" type="Sprite2D" parent="Minerals" unique_id=1640736401]
-position = Vector2(-18, 13)
-scale = Vector2(0.589171, 0.589171)
+position = Vector2(-19.981682, 30.018318)
+scale = Vector2(0.71817756, 0.71817756)
 texture = ExtResource("2_tssxm")
 
 [node name="Energy" type="Label" parent="." unique_id=1559151662]
-offset_left = 34.0
-offset_top = 32.0
-offset_right = 74.0
-offset_bottom = 56.0
-theme_override_constants/outline_size = 5
+offset_left = 47.0
+offset_top = 56.0
+offset_right = 847.0
+offset_bottom = 106.0
+theme_override_colors/font_color = Color(0.75, 0.85, 1, 1)
+theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("4_mquok")
+theme_override_font_sizes/font_size = 34
 text = "test"
 
 [node name="EnergyPNG" parent="Energy" unique_id=2147055597 instance=ExtResource("4_f1fl4")]
-position = Vector2(-17, 13)
+position = Vector2(-19, 28)
+scale = Vector2(0.06481933, 0.06481933)
 
 [node name="Menu" type="Panel" parent="." unique_id=150192023]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -56.0
+offset_top = 12.0
 offset_right = 56.0
-offset_bottom = 48.0
+offset_bottom = 60.0
 grow_horizontal = 2
 
 [node name="Menu" type="Button" parent="Menu" unique_id=1904181451]
@@ -119,10 +130,15 @@ grow_vertical = 0
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -237.0
-offset_bottom = 23.0
+offset_left = -609.0
+offset_top = 2.0
+offset_right = -1.0
+offset_bottom = 52.0
 grow_horizontal = 0
-text = "Цель: Уничтожить базу противника
-"
+theme_override_colors/font_color = Color(0.75, 0.85, 1, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("4_mquok")
+theme_override_font_sizes/font_size = 34
+text = "Цель: Уничтожить базу противника"
 
 [connection signal="pressed" from="Menu/Menu" to="." method="_on_menu_pressed"]

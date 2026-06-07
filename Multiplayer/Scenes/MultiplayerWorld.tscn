@@ -8,7 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://cewmalrtas051" path="res://Audio/OSTAmbient.wav" id="7_50r15"]
 [ext_resource type="Texture2D" uid="uid://dgwblxbp3q4pv" path="res://img/River2.png" id="8_mwjap"]
 [ext_resource type="Texture2D" uid="uid://j77p2nlw752i" path="res://img/River1.png" id="9_5cmft"]
-[ext_resource type="PackedScene" uid="uid://ch3mbfpk7bfqu" path="res://World objects/Mineral.tscn" id="10_lg4sp"]
+[ext_resource type="PackedScene" uid="uid://douvvice0i7l6" path="res://Multiplayer/Scenes/MultiplayerMineral.tscn" id="9_150dk"]
 [ext_resource type="Texture2D" uid="uid://cf8jgcmh3a613" path="res://img/Tree1.png" id="11_4sdov"]
 [ext_resource type="Texture2D" uid="uid://c5p3kc83yhxy2" path="res://img/Tree2.png" id="12_y5tr3"]
 [ext_resource type="PackedScene" uid="uid://bf3b4l314uo5" path="res://Buildings/Factory.tscn" id="13_etwjf"]
@@ -131,28 +131,28 @@ shape = SubResource("RectangleShape2D_oyxum")
 [node name="Objects" type="Node2D" parent="." unique_id=938731098]
 y_sort_enabled = true
 
-[node name="Mineral" parent="Objects" unique_id=1054250168 instance=ExtResource("10_lg4sp")]
-position = Vector2(-1607, 487)
-
-[node name="Mineral2" parent="Objects" unique_id=1057507536 instance=ExtResource("10_lg4sp")]
+[node name="MultiplayerMineral" parent="Objects" unique_id=1207028547 instance=ExtResource("9_150dk")]
 position = Vector2(-1541, 925)
 
-[node name="Mineral3" parent="Objects" unique_id=1553096993 instance=ExtResource("10_lg4sp")]
+[node name="MultiplayerMineral2" parent="Objects" unique_id=360416457 instance=ExtResource("9_150dk")]
 position = Vector2(-1106, 935)
 
-[node name="Mineral4" parent="Objects" unique_id=94173219 instance=ExtResource("10_lg4sp")]
+[node name="MultiplayerMineral3" parent="Objects" unique_id=1434897436 instance=ExtResource("9_150dk")]
+position = Vector2(-1607, 487)
+
+[node name="MultiplayerMineral4" parent="Objects" unique_id=705637389 instance=ExtResource("9_150dk")]
 position = Vector2(-1346, 795)
 
-[node name="Mineral5" parent="Objects" unique_id=1207028547 instance=ExtResource("10_lg4sp")]
+[node name="MultiplayerMineral5" parent="Objects" unique_id=991860394 instance=ExtResource("9_150dk")]
 position = Vector2(1689, -512)
 
-[node name="Mineral6" parent="Objects" unique_id=792636880 instance=ExtResource("10_lg4sp")]
+[node name="MultiplayerMineral6" parent="Objects" unique_id=746220647 instance=ExtResource("9_150dk")]
 position = Vector2(2169, -328)
 
-[node name="Mineral7" parent="Objects" unique_id=1690449104 instance=ExtResource("10_lg4sp")]
+[node name="MultiplayerMineral7" parent="Objects" unique_id=442606015 instance=ExtResource("9_150dk")]
 position = Vector2(2190, -64)
 
-[node name="Mineral8" parent="Objects" unique_id=692821786 instance=ExtResource("10_lg4sp")]
+[node name="MultiplayerMineral8" parent="Objects" unique_id=1211084704 instance=ExtResource("9_150dk")]
 position = Vector2(1950, -204)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=775227512]

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bu8bp1uj6s7en"]
 
 [ext_resource type="Script" uid="uid://d3v7g8oqnimwb" path="res://Multiplayer/Scripts/HighLevelMetworkBuilder.gd" id="1_gjcca"]
-[ext_resource type="Texture2D" uid="uid://bun54fsmgvfmt" path="res://img/Client/BuilderClient.png" id="2_gjcca"]
+[ext_resource type="Texture2D" uid="uid://ba4xo2wc3tc1h" path="res://img/Builder.png" id="4_unslp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ov13o"]
 size = Vector2(42, 42)
@@ -31,7 +31,7 @@ position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_ov13o")
 
 [node name="Builder" type="Sprite2D" parent="." unique_id=1878439132]
-texture = ExtResource("2_gjcca")
+texture = ExtResource("4_unslp")
 
 [node name="Box" type="Panel" parent="." unique_id=1299892354]
 offset_left = -22.0

@@ -32,7 +32,7 @@ func disconnect_peer() -> void:
 	multiplayer.multiplayer_peer = null
 
 func _on_peer_disconnected(id: int) -> void:
-	print("[Network] Peer disconnected: ", id)
+	print("[Network] Пир отсоединён: ", id)
 
 func _on_server_disconnected() -> void:
 	disconnect_peer()

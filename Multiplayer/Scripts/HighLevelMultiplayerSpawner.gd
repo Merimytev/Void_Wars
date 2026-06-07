@@ -14,7 +14,8 @@ var _spawn_count := 0
 func _ready() -> void:
 	multiplayer.peer_connected.connect(spawn_player)
 	if multiplayer.is_server():
-		spawn_player(multiplayer.get_unique_id())
+		# Откладываем спавн хоста — _ready() вызывается пока дерево занято
+		spawn_player.call_deferred(multiplayer.get_unique_id())
 
 func spawn_player(id: int) -> void:
 	if !multiplayer.is_server(): return
@@ -28,4 +29,4 @@ func spawn_player(id: int) -> void:
 	player.position = spawn_pos
 	_spawn_count += 1
 
-	get_node(spawn_path).add_child.call_deferred(player)
+	get_node(spawn_path).add_child(player)

@@ -5,7 +5,8 @@ extends StaticBody2D
 @export var mine_time := 2.0
 
 var current_minerals := total_minerals
-var mining_units: Array = []
+# Хранит authority-ID (peer_id) строителей, которые копают
+var mining_unit_ids: Array = []
 
 @onready var bar = $ProgressBar
 @onready var timer = $Timer
@@ -18,56 +19,66 @@ func _ready():
 	timer.one_shot = false
 
 func _process(_delta):
-	bar.value = current_minerals
+	# Только сервер обновляет bar.value — MultiplayerSynchronizer доставит клиенту
+	if multiplayer.is_server():
+		bar.value = current_minerals
 
-	# Чистим рабочих которые ушли слишком далеко
-	var active_units = []
-	for u in mining_units:
-		if is_instance_valid(u):
-			var dist = global_position.distance_to(u.global_position)
-			if dist < 130.0:
-				active_units.append(u)
-			else:
-				# Юнит ушёл — останавливаем его добычу
-				if u.has_method("on_mineral_depleted"):
-					u.on_mineral_depleted()
-	mining_units = active_units
-
-	if mining_units.is_empty() and not timer.is_stopped():
-		timer.stop()
-
-
+# Вызывается строителем когда начинает копать
 func start_mining(builder: Node) -> void:
-	if not mining_units.has(builder):
-		mining_units.append(builder)
+	var peer_id := builder.get_multiplayer_authority()
+	if multiplayer.is_server():
+		_add_miner(peer_id)
+	else:
+		_add_miner.rpc_id(1, peer_id)
+
+# Вызывается строителем когда перестаёт копать
+func stop_mining(builder: Node) -> void:
+	var peer_id := builder.get_multiplayer_authority()
+	if multiplayer.is_server():
+		_remove_miner(peer_id)
+	else:
+		_remove_miner.rpc_id(1, peer_id)
+
+@rpc("any_peer", "call_local")
+func _add_miner(peer_id: int) -> void:
+	if not multiplayer.is_server(): return
+	if peer_id not in mining_unit_ids:
+		mining_unit_ids.append(peer_id)
 	if timer.is_stopped():
 		timer.start()
 
-func stop_mining(builder: Node) -> void:
-	mining_units.erase(builder)
-	if mining_units.is_empty():
+@rpc("any_peer", "call_local")
+func _remove_miner(peer_id: int) -> void:
+	if not multiplayer.is_server(): return
+	mining_unit_ids.erase(peer_id)
+	if mining_unit_ids.is_empty():
 		timer.stop()
 
 func _on_timer_timeout() -> void:
-	mining_units = mining_units.filter(func(u): return is_instance_valid(u))
-	if mining_units.is_empty():
+	if not multiplayer.is_server(): return
+
+	if mining_unit_ids.is_empty():
 		timer.stop()
 		return
 
-	var mined = min(minerals_per_tick * mining_units.size(), current_minerals)
+	var mined: int = mini(minerals_per_tick * mining_unit_ids.size(), current_minerals)
 	current_minerals -= mined
 	Game.Minerals += mined
 	Game.minerals_send += mined
-
-	var tween = create_tween()
-	tween.tween_property(bar, "value", current_minerals, 0.5)
 
 	if current_minerals <= 0:
 		_depleted()
 
 func _depleted() -> void:
 	timer.stop()
-	for builder in mining_units:
+	# Уведомляем строителей на сервере что минерал исчерпан
+	for builder in get_tree().get_nodes_in_group("builders"):
 		if is_instance_valid(builder) and builder.has_method("on_mineral_depleted"):
-			builder.on_mineral_depleted()
+			if builder.get_multiplayer_authority() in mining_unit_ids:
+				builder.on_mineral_depleted()
+	_network_despawn.rpc()
+
+# Вызывается на всех пирах — минерал исчезает везде
+@rpc("authority", "call_local")
+func _network_despawn() -> void:
 	queue_free()
