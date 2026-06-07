@@ -35,6 +35,10 @@ func _ready():
 	navigation_agent.path_desired_distance = 10.0
 	navigation_agent.target_desired_distance = 10.0
 	update_health_bar()
+	if is_multiplayer_authority():
+		var camera := get_viewport().get_camera_2d()
+		if camera:
+			camera.position = global_position
 
 func _process(delta):
 	if is_instance_valid(build_panel_instance):

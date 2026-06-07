@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://cw0q0amquu33r"]
+
+[ext_resource type="Script" path="res://Buildings/FactoryClient.gd" id="1_u0ou1"]
+[ext_resource type="Texture2D" uid="uid://e2v3kbbkj1c0" path="res://img/Client/FactoryGreen.png" id="2_8t0ml"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k00oa"]
+size = Vector2(60, 40.5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8pdvx"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1.2514e-06, 0.714743, 0.68394, 1)
+border_blend = true
+
+[node name="FactoryClient" type="StaticBody2D" unique_id=1277939091]
+position = Vector2(0, -29)
+scale = Vector2(2, 2)
+input_pickable = true
+script = ExtResource("1_u0ou1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=131808256]
+position = Vector2(0, 8.25)
+shape = SubResource("RectangleShape2D_k00oa")
+
+[node name="Factory" type="Sprite2D" parent="." unique_id=299006063]
+texture = ExtResource("2_8t0ml")
+
+[node name="Selected" type="Panel" parent="." unique_id=96523576]
+offset_left = -33.0
+offset_top = -31.5
+offset_right = 33.0
+offset_bottom = 30.5
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_8pdvx")
+
+[connection signal="mouse_entered" from="." to="." method="_on_factory_building_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_factory_building_mouse_exited"]

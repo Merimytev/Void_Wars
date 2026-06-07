@@ -1,7 +1,7 @@
-[gd_scene format=3 uid="uid://bu8bp1uj6s7en"]
+[gd_scene format=3 uid="uid://cxhxkmgkrbkmt"]
 
-[ext_resource type="Script" uid="uid://d3v7g8oqnimwb" path="res://Multiplayer/Scripts/HighLevelMetworkBuilder.gd" id="1_gjcca"]
-[ext_resource type="Texture2D" uid="uid://bun54fsmgvfmt" path="res://img/Client/BuilderClient.png" id="2_gjcca"]
+[ext_resource type="Script" uid="uid://d3v7g8oqnimwb" path="res://Multiplayer/Scripts/HighLevelMetworkBuilder.gd" id="1_gc4ch"]
+[ext_resource type="Texture2D" uid="uid://bun54fsmgvfmt" path="res://img/Client/BuilderClient.png" id="2_6ei2u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ov13o"]
 size = Vector2(42, 42)
@@ -24,14 +24,14 @@ properties/1/spawn = true
 properties/1/replication_mode = 1
 
 [node name="HighLevelNetworkBuilderClient" type="CharacterBody2D" unique_id=1741133992]
-script = ExtResource("1_gjcca")
+script = ExtResource("1_gc4ch")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=680705600]
 position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_ov13o")
 
 [node name="Builder" type="Sprite2D" parent="." unique_id=1878439132]
-texture = ExtResource("2_gjcca")
+texture = ExtResource("2_6ei2u")
 
 [node name="Box" type="Panel" parent="." unique_id=1299892354]
 offset_left = -22.0

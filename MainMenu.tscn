@@ -3,9 +3,14 @@
 [ext_resource type="Script" uid="uid://b548nrpwg63cy" path="res://MainMenu.gd" id="1_ewhjs"]
 [ext_resource type="Texture2D" uid="uid://8gaub7jwc4im" path="res://img/Menu.png" id="2_eiy7p"]
 [ext_resource type="FontFile" uid="uid://c0h0luwrfuo3t" path="res://img/fonts/PaluiSPDemo-Bold.otf" id="3_h7a2f"]
+[ext_resource type="FontFile" uid="uid://dvn073b5o2dwm" path="res://img/fonts/Orbit-Regular.ttf" id="4_qoqlk"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_qoqlk"]
 font = ExtResource("3_h7a2f")
+font_size = 40
+
+[sub_resource type="LabelSettings" id="LabelSettings_iwfq2"]
+font = ExtResource("4_qoqlk")
 font_size = 40
 
 [node name="Main Menu" type="CanvasLayer" unique_id=1695710479]
@@ -111,6 +116,16 @@ custom_minimum_size = Vector2(360, 52)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Выйти"
+
+[node name="Title2" type="Label" parent="." unique_id=1594018519]
+offset_left = -37.0
+offset_top = 1003.0
+offset_right = 365.0
+offset_bottom = 1062.0
+text = "Версия: 2.0"
+label_settings = SubResource("LabelSettings_iwfq2")
+horizontal_alignment = 1
+uppercase = true
 
 [connection signal="pressed" from="CenterContainer/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/LoadButton" to="." method="_on_load_button_pressed"]

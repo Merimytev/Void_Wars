@@ -1,12 +1,13 @@
 extends MultiplayerSpawner
 
-@export var network_player: PackedScene
-
 # Стартовые позиции по порядку подключения: хост, клиент 1, клиент 2...
 const SPAWN_POSITIONS: Array[Vector2] = [
 	Vector2(-1600, 650),
-	Vector2(1900, -400),
+	Vector2(2200, 300),
 ]
+
+@export var network_player: PackedScene
+@export var network_player_client: PackedScene
 
 var _spawn_count := 0
 
@@ -18,9 +19,13 @@ func _ready() -> void:
 func spawn_player(id: int) -> void:
 	if !multiplayer.is_server(): return
 
-	var player: Node = network_player.instantiate()
+	var is_host_spawn := (id == multiplayer.get_unique_id())
+	var scene := network_player if is_host_spawn else network_player_client
+
+	var player: Node = scene.instantiate()
 	player.name = str(id)
-	player.position = SPAWN_POSITIONS[_spawn_count % SPAWN_POSITIONS.size()]
+	var spawn_pos := SPAWN_POSITIONS[_spawn_count % SPAWN_POSITIONS.size()]
+	player.position = spawn_pos
 	_spawn_count += 1
 
-	get_node(spawn_path).call_deferred("add_child", player)
+	get_node(spawn_path).add_child.call_deferred(player)
