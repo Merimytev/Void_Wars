@@ -17,6 +17,8 @@ func reset_resources():
 	Energy = 0
 	TimePlayed = 0.0
 	killed_count = 0
+	units = []
+	selected_player = {}
 	print("Ресурсы и время сброшены")
 
 var minerals_send: int:
@@ -43,9 +45,6 @@ func update_units():
 
 func get_elapsed_time() -> float:
 	return TimePlayed
-
-
-
 
 
 func _on_right_click(click_position: Vector2) -> void:

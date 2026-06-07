@@ -13,6 +13,9 @@ extends CharacterBody2D
 var hp := max_hp
 var can_shoot := true
 var target_queue: Array = []
+var is_moving := false
+# 1 = хост; клиентские юниты получают peer ID клиента (задаётся фабрикой до _ready)
+var owner_id: int = 1
 
 # ═══ Узлы ════════════════════════════════════════════════════════
 @onready var box = $Box
@@ -29,8 +32,8 @@ func _ready():
 
 	nav_agent.path_desired_distance = 10.0
 	nav_agent.target_desired_distance = 10.0
-	nav_agent.avoidance_enabled = true
-	nav_agent.velocity_computed.connect(_on_velocity_computed)
+	nav_agent.avoidance_enabled = false
+	nav_agent.navigation_layers = 1  # совпадает со слоем NavigationRegion2D
 
 	var timer = Timer.new()
 	timer.name = "ShootTimer"
@@ -52,32 +55,34 @@ func set_selected(value: bool) -> void:
 
 func _physics_process(_delta):
 	_update_movement()
+	move_and_slide()
 	_shooting()
 
 func _update_movement() -> void:
-	if nav_agent.is_navigation_finished():
+	if not is_moving:
 		velocity = Vector2.ZERO
+		return
+
+	if nav_agent.is_navigation_finished():
+		is_moving = false
+		target_queue.pop_front()
 		if target_queue.size() > 0:
-			target_queue.pop_front()
-			if target_queue.size() > 0:
-				_go_to_next_target()
+			_go_to_next_target()
+		velocity = Vector2.ZERO
 		return
 
 	var next_pos = nav_agent.get_next_path_position()
-	var dir = position.direction_to(next_pos)
-	velocity = dir * speed
-
-	if position.distance_to(next_pos) > nav_agent.path_desired_distance:
-		nav_agent.set_velocity(velocity)
+	if next_pos.distance_squared_to(global_position) < 1.0:
+		return
+	velocity = global_position.direction_to(next_pos) * speed
 
 func _go_to_next_target() -> void:
 	if target_queue.size() == 0:
+		is_moving = false
 		return
+	is_moving = true
 	nav_agent.set_target_position(target_queue[0])
 
-func _on_velocity_computed(safe_velocity: Vector2) -> void:
-	velocity = safe_velocity
-	move_and_slide()
 
 # ─── Стрельба ─────────────────────────────────────────────────────
 
@@ -103,25 +108,35 @@ func _shoot(target_node: Node2D) -> void:
 	if target_node.has_method("take_damage"):
 		target_node.take_damage(damage)
 
+# Возвращает список враждебных узлов в радиусе attack_range,
+# отсортированных по возрастанию расстояния.
+# Логика принадлежности: owner_id==1 — хост, иначе — клиент.
 func _get_enemies_in_range(radius: float) -> Array:
-	var enemies = []
-	var space_state = get_world_2d().direct_space_state
-	var query = PhysicsShapeQueryParameters2D.new()
-	var shape = CircleShape2D.new()
-	shape.radius = radius
-	query.shape = shape
-	query.transform = Transform2D(0, global_position)
-	query.collision_mask = 1
-	var results = space_state.intersect_shape(query)
-	for result in results:
-		var collider = result.collider
-		if is_instance_valid(collider) and collider.is_in_group("enemies"):
-			enemies.append(collider)
-	enemies.sort_custom(func(a, b):
+	var enemies: Array = []
+	for node in get_tree().get_nodes_in_group("player_units"):
+		if not is_instance_valid(node) or node == self:
+			continue
+		var target_owner = node.get("owner_id")
+		if target_owner == null:
+			continue
+		if not _is_enemy(target_owner):
+			continue
+		if node is Node2D:
+			var dist: float = global_position.distance_to((node as Node2D).global_position)
+			if dist <= radius:
+				enemies.append(node)
+	enemies.sort_custom(func(a: Node2D, b: Node2D) -> bool:
 		return global_position.distance_squared_to(a.global_position) \
 			< global_position.distance_squared_to(b.global_position)
 	)
 	return enemies
+
+# Возвращает true, если target_owner_id является враждебным по отношению к this.
+# Хостовый юнит (owner_id==1) атакует всё с owner_id!=1 и наоборот.
+func _is_enemy(target_owner_id: int) -> bool:
+	if owner_id == 1:
+		return target_owner_id != 1
+	return target_owner_id == 1
 
 # ─── Таймер стрельбы ─────────────────────────────────────────────
 

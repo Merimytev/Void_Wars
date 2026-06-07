@@ -34,20 +34,30 @@ func _set_rich_label(label: RichTextLabel, texture: Texture2D, cost: int) -> voi
 	label.custom_minimum_size = Vector2(60, 20)  # ← минимальный размер
 	label.add_theme_font_size_override("normal_font_size", 12)
 	label.append_text("[img=16x16]" + texture.resource_path + "[/img] " + str(cost))
-	
+
 func _on_factory_button_pressed() -> void:
-	if Game.Minerals >= factory_mineral_cost and Game.Energy >= factory_energy_cost:
+	var ok_min: bool = Game.Minerals >= factory_mineral_cost
+	var ok_en: bool  = Game.Energy   >= factory_energy_cost
+	if ok_min and ok_en:
 		emit_signal("build_selected", "factory")
 		queue_free()
 	else:
-		_flash_error($PanelContainer/HBoxContainer/FactorySlot)
+		if not ok_min:
+			_flash_error($PanelContainer/HBoxContainer/FactorySlot/HBoxContainer)
+		if not ok_en:
+			_flash_error($PanelContainer/HBoxContainer/FactorySlot/HBoxContainer2)
 
 func _on_turret_button_pressed() -> void:
-	if Game.Minerals >= turret_mineral_cost and Game.Energy >= turret_energy_cost:
+	var ok_min: bool = Game.Minerals >= turret_mineral_cost
+	var ok_en: bool  = Game.Energy   >= turret_energy_cost
+	if ok_min and ok_en:
 		emit_signal("build_selected", "turret")
 		queue_free()
 	else:
-		_flash_error($PanelContainer/HBoxContainer/TurretSlot)
+		if not ok_min:
+			_flash_error($PanelContainer/HBoxContainer/TurretSlot/HBoxContainer2)
+		if not ok_en:
+			_flash_error($PanelContainer/HBoxContainer/TurretSlot/HBoxContainer)
 
 func _flash_error(slot: Control) -> void:
 	var tween = create_tween()

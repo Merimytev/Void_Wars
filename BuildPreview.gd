@@ -51,11 +51,18 @@ func setup(type: String, builder: Node) -> void:
 				rect.size = Vector2(44.0, 35.0) * 2.0
 		cs.shape = rect
 
+func _is_over_ui() -> bool:
+	const BOTTOM_BAR_HEIGHT := 165
+	var screen_h: float = get_viewport().get_visible_rect().size.y
+	return get_viewport().get_mouse_position().y > screen_h - BOTTOM_BAR_HEIGHT
+
 func _process(_delta):
 	if is_placing:
 		return
 	global_position = get_global_mouse_position()
-	if can_place:
+	if _is_over_ui():
+		sprite.modulate = Color(1, 0, 0, 0.5)
+	elif can_place:
 		sprite.modulate = Color(0, 1, 0, 0.5)
 	else:
 		sprite.modulate = Color(1, 0, 0, 0.5)
@@ -64,9 +71,11 @@ func _input(event):
 	if is_placing:
 		return
 	if event.is_action_pressed("LeftClick"):
-		if can_place:
+		if can_place and not _is_over_ui():
 			_place_building()
-	if event.is_action_pressed("ui_cancel"):
+	if event.is_action_pressed("ui_cancel") or event.is_action_pressed("RightClick"):
+		if is_instance_valid(builder_ref):
+			builder_ref.set(&"is_constructing", false)
 		queue_free()
 
 func _place_building() -> void:
@@ -84,6 +93,15 @@ func _place_building() -> void:
 		push_error("BuildPreview: сцена не задана для " + building_type)
 		return
 
+	if Game.Minerals < pending_mineral_cost or Game.Energy < pending_energy_cost:
+		var ui := get_tree().get_root().get_node_or_null("World/UI") as Node
+		if ui:
+			if Game.Minerals < pending_mineral_cost and ui.has_method("flash_no_minerals"):
+				ui.flash_no_minerals()
+			if Game.Energy < pending_energy_cost and ui.has_method("flash_no_energy"):
+				ui.flash_no_energy()
+		return
+
 	Game.Minerals -= pending_mineral_cost
 	Game.Energy -= pending_energy_cost
 
@@ -92,6 +110,7 @@ func _place_building() -> void:
 	sprite.visible = false
 
 	if is_instance_valid(builder_ref):
+		builder_ref.set(&"is_constructing", true)
 		builder_ref.target_queue.clear()
 		builder_ref.target_queue.append(build_position)
 		builder_ref._go_to_next_target()
@@ -120,11 +139,20 @@ func _start_construction() -> void:
 	print("_start_construction вызван!")
 
 	var ghost = pending_scene.instantiate()
-	var buildings_node = get_tree().get_root().get_node(
-		"World/NavigationRegion2D2/NavigationRegion2D/Buildings")
+	var buildings_node: Node = get_tree().get_root().get_node_or_null(
+		"World/NavigationRegion2D/Buildings")
+	if not buildings_node:
+		buildings_node = get_tree().get_root().get_node(
+			"World/NavigationRegion2D2/NavigationRegion2D/Buildings")
 	buildings_node.add_child(ghost)
 	ghost.global_position = build_position
 	ghost.modulate = Color(1, 1, 1, 0.4)
+	# Глушим скрипт госта — иначе солнечная панель начнёт генерировать энергию до постройки
+	ghost.set_process(false)
+	ghost.set_physics_process(false)
+	var ghost_timer := ghost.get_node_or_null("Timer") as Timer
+	if ghost_timer:
+		ghost_timer.stop()
 
 	var collision = ghost.get_node_or_null("CollisionShape2D")
 	if collision:
@@ -146,6 +174,7 @@ func _start_construction() -> void:
 	build_timer.start()
 
 	var captured_builder := builder_ref
+	var captured_ghost: Node = ghost
 	var exit_point := build_position + Vector2(0, 80)
 
 	build_timer.timeout.connect(func():
@@ -154,7 +183,15 @@ func _start_construction() -> void:
 		if done:
 			build_timer.queue_free()
 			print("Здание построено!")
+			# Включаем скрипт здания (солнечная панель начинает работу)
+			if is_instance_valid(captured_ghost):
+				captured_ghost.set_process(true)
+				captured_ghost.set_physics_process(true)
+				var t := captured_ghost.get_node_or_null("Timer") as Timer
+				if t:
+					t.start()
 			if is_instance_valid(captured_builder):
+				captured_builder.set(&"is_constructing", false)
 				captured_builder.target_queue.clear()
 				captured_builder.target_queue.append(exit_point)
 				captured_builder._go_to_next_target()

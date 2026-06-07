@@ -12,6 +12,7 @@ var is_spawning := false
 var elapsed := 0.0
 var pending_scene: PackedScene = null
 var spawn_position_offset := Vector2(0, 60)
+var owner_id: int = 1  # 1 = хост; клиентские фабрики переопределяют в _ready()
 
 @onready var select = $Selected
 
@@ -79,9 +80,17 @@ func _finish_spawn() -> void:
 	var offset = Vector2(randi_range(-30, 30), randi_range(-30, 30))
 	unit.position = pos + offset
 
-	var unit_path = get_tree().get_root().get_node("World/Units")
+	# Передаём принадлежность юниту до входа в дерево сцены (_ready ещё не вызван)
+	if "owner_id" in unit:
+		unit.owner_id = owner_id
+
+	var world := get_tree().get_root().get_node("World")
+	var unit_path: Node = world.get_node_or_null("Units")
+	if not unit_path:
+		unit_path = world
 	unit_path.add_child(unit)
-	get_tree().get_root().get_node("World").get_units()
+	if world.has_method("get_units"):
+		world.get_units()
 	print("Юнит создан!")
 
 func _unhandled_input(event):

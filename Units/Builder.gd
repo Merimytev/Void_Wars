@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 const REPAIR_RATE := 20.0
-const REPAIR_RANGE := 80.0
+const REPAIR_RANGE := 150.0
 
 @export var selected = false
 @export var build_panel_scene: PackedScene
@@ -18,6 +18,7 @@ var is_mining := false
 var build_panel_instance: Node = null
 var repair_mode: bool = false
 var repair_target: Node = null
+var is_constructing: bool = false
 
 @onready var box = get_node("Box")
 @onready var builder_sprite = get_node("Builder")
@@ -49,6 +50,8 @@ func set_selected(value):
 	box.visible = value
 
 func _input(event):
+	if is_constructing:
+		return
 	if not selected:
 		return
 	if repair_mode:
@@ -59,8 +62,11 @@ func _input(event):
 			var building = _get_building_at(get_global_mouse_position())
 			if building:
 				repair_target = building
+				var dir: Vector2 = (global_position - building.global_position).normalized()
+				if dir == Vector2.ZERO:
+					dir = Vector2.DOWN
 				target_queue.clear()
-				target_queue.append(building.global_position)
+				target_queue.append(building.global_position + dir * 90.0)
 				_go_to_next_target()
 			get_viewport().set_input_as_handled()
 			return

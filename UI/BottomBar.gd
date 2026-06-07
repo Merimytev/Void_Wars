@@ -273,7 +273,7 @@ func _refresh() -> void:
 		if _in_build_mode:
 			var sq := Vector2(150, 150)
 			_add_btn("ЗАВОД", "F", _on_factory_pressed, "Завод", FACTORY_COST, sq, 18)
-			_add_btn("СОЛНЕЧНАЯ\nПАНЕЛЬ", "T", _on_turret_pressed, "Солнечная панель", SOLAR_COST, sq, 18)
+			_add_btn("СОЛНЕЧНАЯ\nПАНЕЛЬ", "E", _on_turret_pressed, "Солнечная панель", SOLAR_COST, sq, 18)
 			_add_btn("ОТМЕНА", "Esc", _on_cancel_build, "", {}, sq, 18)
 		else:
 			_add_btn("СТРОИТЬ", "B", _on_build_pressed, "", {}, BTN_SIZE * 2, 26)
@@ -390,7 +390,7 @@ func _input(event: InputEvent) -> void:
 			KEY_F:
 				_on_factory_pressed()
 				get_viewport().set_input_as_handled()
-			KEY_T:
+			KEY_E:
 				_on_turret_pressed()
 				get_viewport().set_input_as_handled()
 			KEY_ESCAPE:

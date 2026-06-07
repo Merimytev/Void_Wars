@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://d3v7g8oqnimwb" path="res://Multiplayer/Scripts/HighLevelMetworkBuilder.gd" id="1_gjcca"]
 [ext_resource type="Texture2D" uid="uid://ba4xo2wc3tc1h" path="res://img/Builder.png" id="4_unslp"]
+[ext_resource type="PackedScene" uid="uid://cvh6eqa7tmf5d" path="res://BuildPanel.tscn" id="5_bp"]
+[ext_resource type="PackedScene" uid="uid://bq6bnx6y0f7bj" path="res://BuildPreview.tscn" id="6_bprev"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ov13o"]
 size = Vector2(42, 42)
@@ -25,6 +27,8 @@ properties/1/replication_mode = 1
 
 [node name="HighLevelNetworkBuilderClient" type="CharacterBody2D" unique_id=1741133992]
 script = ExtResource("1_gjcca")
+build_panel_scene = ExtResource("5_bp")
+build_preview_scene = ExtResource("6_bprev")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=680705600]
 position = Vector2(0, 2)

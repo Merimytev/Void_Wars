@@ -8,6 +8,7 @@ func _process(delta: float) -> void:
 	update_units()
 
 func _ready():
+	Game.reset_resources()
 	await get_tree().process_frame
 	var win_panel = preload("res://UI/WinPanel.tscn").instantiate()
 	add_child(win_panel)
@@ -41,7 +42,7 @@ func _on_right_click(click_position: Vector2) -> void:
 	var all_units = get_tree().get_nodes_in_group("units")
 	var selected_units = []
 	for u in all_units:
-		if is_instance_valid(u) and u.get("selected") == true:
+		if is_instance_valid(u) and u.get("selected") == true and not u.get("is_constructing"):
 			selected_units.append(u)
 
 	if selected_units.is_empty():

@@ -127,7 +127,7 @@ offset_right = 720.0
 offset_bottom = 224.0
 theme_override_constants/outline_size = 5
 theme_override_fonts/font = ExtResource("3_uvxnl")
-text = "12"
+text = "25"
 
 [node name="MineralsPNG" type="Sprite2D" parent="Minerals2" unique_id=647233298]
 position = Vector2(-19.22, 13)

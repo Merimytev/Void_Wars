@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://c87piubka7l2s"]
+
+[ext_resource type="Script" path="res://Units/SoldierClient.gd" id="1_soldcl"]
+[ext_resource type="PackedScene" uid="uid://cs4o7p815wa73" path="res://SolderBullet.tscn" id="2_jl2a8"]
+[ext_resource type="Texture2D" uid="uid://chh4fjg2gr2cr" path="res://img/Client/SoldierClient.png" id="3_bvryb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_byptv"]
+size = Vector2(42, 42)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wnpey"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1.2514e-06, 0.714743, 0.68394, 1)
+border_blend = true
+
+[node name="SoldierClient" type="CharacterBody2D" unique_id=1203588829]
+script = ExtResource("1_soldcl")
+bullet_scene = ExtResource("2_jl2a8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1928639646]
+shape = SubResource("RectangleShape2D_byptv")
+
+[node name="Soldier" type="Sprite2D" parent="." unique_id=1113485923]
+scale = Vector2(1.6914, 1.6914)
+texture = ExtResource("3_bvryb")
+
+[node name="Box" type="Panel" parent="." unique_id=164826182]
+offset_left = -22.0
+offset_top = -22.0
+offset_right = 22.0
+offset_bottom = 22.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_wnpey")
+metadata/_edit_use_anchors_ = true
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=734470000]
+path_desired_distance = 175.54
+target_desired_distance = 93.25
+navigation_layers = 2
+debug_enabled = true
+debug_use_custom = true
+debug_path_custom_color = Color(0.226471, 0.708427, 0.261719, 1)
+
+[node name="Healthbar" type="ProgressBar" parent="." unique_id=997811172]
+modulate = Color(0.0565745, 0.743051, 0.0473038, 1)
+offset_left = -29.0
+offset_top = -37.0
+offset_right = 30.0
+offset_bottom = -26.0
+value = 100.0
+show_percentage = false
+metadata/_edit_use_anchors_ = true
