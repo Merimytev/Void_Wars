@@ -145,5 +145,19 @@ func take_damage(amount: float) -> void:
 		_die()
 
 func _die() -> void:
-	Game.player_defeated.emit()
+	if multiplayer.multiplayer_peer == null:
+		# Одиночная игра: эта фабрика всегда принадлежит игроку
+		Game.player_defeated.emit()
+		queue_free()
+		return
+	# Мультиплеер: сообщаем обоим игрокам чья база уничтожена
+	_broadcast_game_over.rpc(owner_id)
 	queue_free()
+
+@rpc("any_peer", "call_local", "reliable")
+func _broadcast_game_over(defeated_owner_id: int) -> void:
+	var local_owner_id: int = 1 if multiplayer.is_server() else multiplayer.get_unique_id()
+	if local_owner_id == defeated_owner_id:
+		Game.player_defeated.emit()
+	else:
+		Game.base_destroyed.emit()

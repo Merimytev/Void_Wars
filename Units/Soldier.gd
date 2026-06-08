@@ -103,23 +103,26 @@ func _shoot(target_node: Node2D) -> void:
 		bullet.global_position = global_position
 		var dir = (target_node.global_position - global_position).normalized()
 		if bullet.has_method("init"):
-			bullet.init(dir, damage)
+			bullet.init(dir, damage, owner_id)
 		return
 	if target_node.has_method("take_damage"):
 		target_node.take_damage(damage)
 
 # Возвращает список враждебных узлов в радиусе attack_range,
 # отсортированных по возрастанию расстояния.
-# Логика принадлежности: owner_id==1 — хост, иначе — клиент.
 func _get_enemies_in_range(radius: float) -> Array:
-	var enemies: Array = []
+	var candidates: Array = []
+	# Одиночная игра: юниты группы "enemies" (Enemy.gd)
+	candidates.append_array(get_tree().get_nodes_in_group("enemies"))
+	# Мультиплеер: узлы из "player_units" с owner_id противника
 	for node in get_tree().get_nodes_in_group("player_units"):
-		if not is_instance_valid(node) or node == self:
-			continue
 		var target_owner = node.get("owner_id")
-		if target_owner == null:
-			continue
-		if not _is_enemy(target_owner):
+		if target_owner != null and _is_enemy(target_owner):
+			candidates.append(node)
+
+	var enemies: Array = []
+	for node in candidates:
+		if not is_instance_valid(node) or node == self:
 			continue
 		if node is Node2D:
 			var dist: float = global_position.distance_to((node as Node2D).global_position)

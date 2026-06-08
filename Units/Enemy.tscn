@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://bndks45jl8sp1"]
+[gd_scene format=3 uid="uid://bndks45jl8sp1"]
 
 [ext_resource type="Script" uid="uid://0o7w5h4ij2wd" path="res://Units/Enemy.gd" id="1_tvyna"]
 [ext_resource type="Texture2D" uid="uid://db24iexo82umt" path="res://img/Enemy.png" id="2_66rb2"]
@@ -6,19 +6,19 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ov13o"]
 size = Vector2(42, 42)
 
-[node name="Enemie" type="CharacterBody2D"]
+[node name="Enemie" type="CharacterBody2D" unique_id=1435323142]
 script = ExtResource("1_tvyna")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=756813459]
 position = Vector2(0, -31)
 shape = SubResource("RectangleShape2D_ov13o")
 
-[node name="Enemie" type="Sprite2D" parent="."]
+[node name="Enemie" type="Sprite2D" parent="." unique_id=1351971553]
 position = Vector2(0, -31)
 scale = Vector2(1.691, 1.691)
 texture = ExtResource("2_66rb2")
 
-[node name="Healthbar" type="ProgressBar" parent="."]
+[node name="Healthbar" type="ProgressBar" parent="." unique_id=1669788502]
 modulate = Color(0.054902, 0.741176, 0.0470588, 1)
 offset_left = -23.0
 offset_top = -63.0

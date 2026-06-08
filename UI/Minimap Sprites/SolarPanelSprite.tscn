@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://p24hp2212ghc"]
+[gd_scene format=3 uid="uid://p24hp2212ghc"]
 
 [ext_resource type="Texture2D" uid="uid://de8pua63j1w6i" path="res://img/SolarPanel.png" id="1_v4r3s"]
 
-[node name="Sprite2D" type="Sprite2D"]
+[node name="Sprite2D" type="Sprite2D" unique_id=1535620410]
 texture = ExtResource("1_v4r3s")

@@ -1,7 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://m1e0euuca4eb"]
+[gd_scene format=3 uid="uid://m1e0euuca4eb"]
 
 [ext_resource type="Texture2D" uid="uid://db24iexo82umt" path="res://img/Enemy.png" id="1_eph6f"]
 
-[node name="Enemie" type="Sprite2D"]
+[node name="Enemie" type="Sprite2D" unique_id=55726201]
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("1_eph6f")

@@ -1,6 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://bf3b4l314uo5"]
+[gd_scene format=3 uid="uid://bf3b4l314uo5"]
 
-[ext_resource type="Script" path="res://Buildings/Factory.gd" id="1_xbug7"]
+[ext_resource type="Script" uid="uid://baf6mduos5lbq" path="res://Buildings/Factory.gd" id="1_xbug7"]
 [ext_resource type="Texture2D" uid="uid://b2qe7mfhsthni" path="res://img/FactoryBlue.png" id="2_ahjuk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k00oa"]
@@ -15,20 +15,20 @@ border_width_bottom = 2
 border_color = Color(1.2514e-06, 0.714743, 0.68394, 1)
 border_blend = true
 
-[node name="Factory" type="StaticBody2D"]
+[node name="Factory" type="StaticBody2D" unique_id=803843514]
 position = Vector2(0, -29)
 scale = Vector2(2, 2)
 input_pickable = true
 script = ExtResource("1_xbug7")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=359539897]
 position = Vector2(0, 8.25)
 shape = SubResource("RectangleShape2D_k00oa")
 
-[node name="Factory" type="Sprite2D" parent="."]
+[node name="Factory" type="Sprite2D" parent="." unique_id=685601618]
 texture = ExtResource("2_ahjuk")
 
-[node name="Selected" type="Panel" parent="."]
+[node name="Selected" type="Panel" parent="." unique_id=78419723]
 offset_left = -33.0
 offset_top = -31.5
 offset_right = 33.0

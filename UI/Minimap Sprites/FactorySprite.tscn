@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://e0di2sko55om"]
+[gd_scene format=3 uid="uid://e0di2sko55om"]
 
 [ext_resource type="Texture2D" uid="uid://b2qe7mfhsthni" path="res://img/FactoryBlue.png" id="1_ckr38"]
 
-[node name="Factory" type="Sprite2D"]
+[node name="Factory" type="Sprite2D" unique_id=1974892883]
 texture = ExtResource("1_ckr38")

@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://bafkwfcqermta"]
+[gd_scene format=3 uid="uid://bafkwfcqermta"]
 
 [ext_resource type="Script" uid="uid://ecrqihdr3dwk" path="res://Global/POP.gd" id="1_nmnkj"]
 [ext_resource type="Texture2D" uid="uid://83sphaxq5hdn" path="res://img/Energy.png" id="2_ty7py"]
 
-[node name="POP" type="Label"]
+[node name="POP" type="Label" unique_id=397234798]
 offset_left = -40.0
 offset_top = -24.0
 offset_right = 41.0
@@ -12,7 +12,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("1_nmnkj")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=503983260]
 position = Vector2(69, 11)
 scale = Vector2(0.0476074, 0.0476074)
 texture = ExtResource("2_ty7py")

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dh5vvxu5334gb"]
 
-[ext_resource type="Script" uid="uid://ddyej6cdst5g5" path="res://Buildings/SolarPanel.gd" id="1_ls6qu"]
+[ext_resource type="Script" uid="uid://vxjd0b8o474p" path="res://Buildings/SolarPanelClient.gd" id="1_solcl"]
 [ext_resource type="Texture2D" uid="uid://brmp8qnidwwac" path="res://img/Client/SolarPanelClient.png" id="2_27l4x"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qull1"]
@@ -23,7 +23,7 @@ corner_radius_bottom_left = 2
 y_sort_enabled = true
 position = Vector2(0, -7)
 scale = Vector2(2, 2)
-script = ExtResource("1_ls6qu")
+script = ExtResource("1_solcl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=589872891]
 position = Vector2(0, -10.5)

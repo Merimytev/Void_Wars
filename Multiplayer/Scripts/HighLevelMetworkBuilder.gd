@@ -10,6 +10,7 @@ const REPAIR_RANGE := 150.0
 var speed = 80
 var hp = 60
 var max_hp = 60
+var owner_id: int = 1  # задаётся в _ready() из имени узла (= peer ID)
 var target_queue = []
 var is_moving := false
 var target_mineral: Node = null
@@ -29,6 +30,7 @@ func _enter_tree() -> void:
 	set_multiplayer_authority(name.to_int())
 
 func _ready():
+	owner_id = name.to_int()  # имя узла = peer ID (задаётся MultiplayerSpawner)
 	set_selected(selected)
 	add_to_group("units", true)
 	add_to_group("builders", true)

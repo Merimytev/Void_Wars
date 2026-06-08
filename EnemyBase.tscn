@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dv13ew4tmmp7j"]
 
-[ext_resource type="Script" uid="uid://pq4d50rnbj7p" path="res://StaticBody2d.gd" id="1_ypqmy"]
+[ext_resource type="Script" uid="uid://bc2l5qv3k6ohx" path="res://StaticBody2d.gd" id="1_ypqmy"]
 [ext_resource type="Texture2D" uid="uid://dr01wf8ctg6dg" path="res://img/EnemyBase.png" id="2_dyby8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7r4uk"]

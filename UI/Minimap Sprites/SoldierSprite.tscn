@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://dyuedpantfuye"]
+[gd_scene format=3 uid="uid://dyuedpantfuye"]
 
 [ext_resource type="Texture2D" uid="uid://bjhhjr8muq6xh" path="res://img/Soldier.png" id="1_b2fwc"]
 
-[node name="Soldier" type="Sprite2D"]
+[node name="Soldier" type="Sprite2D" unique_id=672682288]
 position = Vector2(0, -7.62939e-06)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("1_b2fwc")

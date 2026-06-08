@@ -23,7 +23,6 @@ var endV = Vector2()
 var isDragging = false
 var is_additive_selection := false
 signal area_selected(camera_node: Node, additive: bool)
-signal start_move_selection
 signal single_click(position)
 @onready var box = get_node("../UI/Panel")
 
@@ -43,9 +42,11 @@ func _process(delta):
 	position.x = lerp(position.x, position.x + inputX * CAMERA_SPEED * zoom.x, CAMERA_SPEED * delta)
 	position.y = lerp(position.y, position.y + inputY * CAMERA_SPEED * zoom.y, CAMERA_SPEED * delta)
 	
-	# Ограничение позиции камеры в пределах limit_*
-	position.x = clamp(position.x, limit_left, limit_right)
-	position.y = clamp(position.y, limit_top, limit_bottom)
+	var vp := get_viewport_rect().size
+	var half_w := vp.x * 0.5 / zoom.x
+	var half_h := vp.y * 0.5 / zoom.y
+	position.x = clamp(position.x, limit_left + half_w, limit_right - half_w)
+	position.y = clamp(position.y, limit_top + half_h, limit_bottom - half_h)
 	
 	zoom.x = lerp(zoom.x, zoom.x * zoomFactor, ZOOM_SPEED * delta)
 	zoom.y = lerp(zoom.y, zoom.y * zoomFactor, ZOOM_SPEED * delta)

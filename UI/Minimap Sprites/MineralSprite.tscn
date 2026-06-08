@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://d23bi6m4rqsug"]
+[gd_scene format=3 uid="uid://d23bi6m4rqsug"]
 
 [ext_resource type="Texture2D" uid="uid://vhkpsdkaih5p" path="res://img/Mineral.png" id="1_b0ifd"]
 
-[node name="Mineral" type="Sprite2D"]
+[node name="Mineral" type="Sprite2D" unique_id=1513242114]
 texture = ExtResource("1_b0ifd")
