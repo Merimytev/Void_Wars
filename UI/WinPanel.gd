@@ -1,7 +1,6 @@
 extends CanvasLayer
 
 var _won: bool = false
-var _is_victory: bool = false
 var server_url = "https://void-wars-players-statistics-80327b04.fastapicloud.dev"
 
 @onready var _dim: ColorRect = $Dim
@@ -18,13 +17,11 @@ func _ready() -> void:
 func _on_victory() -> void:
 	if not _won:
 		_won = true
-		_is_victory = true
 		_show_end_screen("Вы победили!")
 
 func _on_defeat() -> void:
 	if not _won:
 		_won = true
-		_is_victory = false
 		_show_end_screen("Вы проиграли!")
 
 func _show_end_screen(title_text: String) -> void:
