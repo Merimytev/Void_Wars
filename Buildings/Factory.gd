@@ -89,9 +89,30 @@ func _finish_spawn() -> void:
 	if not unit_path:
 		unit_path = world
 	unit_path.add_child(unit)
+
+	if multiplayer.multiplayer_peer != null and pending_scene:
+		_rpc_spawn_unit.rpc(pending_scene.resource_path, unit.position, owner_id)
+
 	if world.has_method("get_units"):
 		world.get_units()
 	print("Юнит создан!")
+
+@rpc("any_peer", "reliable")
+func _rpc_spawn_unit(scene_path: String, pos: Vector2, o_id: int) -> void:
+	var scene: PackedScene = load(scene_path)
+	if not scene:
+		return
+	var unit = scene.instantiate()
+	unit.position = pos
+	if "owner_id" in unit:
+		unit.owner_id = o_id
+	var world := get_tree().get_root().get_node("World")
+	var unit_path: Node = world.get_node_or_null("Units")
+	if not unit_path:
+		unit_path = world
+	unit_path.add_child(unit)
+	if world.has_method("get_units"):
+		world.get_units()
 
 func _unhandled_input(event):
 	if event.is_action_pressed("LeftClick"):

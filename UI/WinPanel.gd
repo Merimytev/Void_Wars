@@ -89,6 +89,8 @@ func _on_stats_pressed() -> void:
 		print("Отправлены ПУСТЫЕ данные об игре на БД")
 
 	get_tree().paused = false
+	if multiplayer.multiplayer_peer != null:
+		HighLevelNetworkHandler.disconnect_peer()
 	get_tree().change_scene_to_file("res://Stats/Stats.tscn")
 
 
@@ -108,4 +110,6 @@ func _on_menu_pressed() -> void:
 		await send_data(name_input.text, Game.Minerals, Game.Energy, 0, Game.killed_count)
 
 	get_tree().paused = false
+	if multiplayer.multiplayer_peer != null:
+		HighLevelNetworkHandler.disconnect_peer()
 	get_tree().change_scene_to_file("res://MainMenu.tscn")

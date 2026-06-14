@@ -1,8 +1,5 @@
 extends CanvasLayer
 
-const FONT_PATH := "res://img/fonts/Orbit-Regular.ttf"
-const BG_PATH := "res://img/Menu.png"
-
 func _on_play_button_pressed() -> void:
 	Game.reset_resources()
 	get_tree().change_scene_to_file("res://World.tscn")
