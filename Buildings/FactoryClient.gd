@@ -3,8 +3,6 @@ extends "res://Buildings/Factory.gd"
 # Сцены для подстановки при спавне — клиент всегда создаёт SoldierClient
 const SOLDIER_HOST_SCENE = preload("res://Units/Soldier.tscn")
 const SOLDIER_CLIENT_SCENE = preload("res://Multiplayer/Scenes/SoldierClient.tscn")
-const BUILDER_HOST_SCENE = preload("res://Units/Builder.tscn")
-
 func _ready() -> void:
 	super._ready()
 	owner_id = _get_client_id()
@@ -31,8 +29,6 @@ func _on_first_peer_connected(id: int) -> void:
 func start_spawn(scene: PackedScene) -> void:
 	if scene == SOLDIER_HOST_SCENE:
 		super.start_spawn(SOLDIER_CLIENT_SCENE)
-	elif scene == BUILDER_HOST_SCENE:
-		return
 	else:
 		super.start_spawn(scene)
 

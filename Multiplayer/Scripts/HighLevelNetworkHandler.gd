@@ -51,4 +51,5 @@ func _on_peer_disconnected(id: int) -> void:
 
 func _on_server_disconnected() -> void:
 	_cleanup_peer()
+	get_tree().paused = false
 	get_tree().change_scene_to_file("res://MainMenu.tscn")

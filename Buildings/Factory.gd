@@ -84,6 +84,10 @@ func _finish_spawn() -> void:
 	if "owner_id" in unit:
 		unit.owner_id = owner_id
 
+	# Детерминированное имя — одинаковое на обеих машинах после получения RPC
+	var unit_name := "u%d_%d" % [owner_id, Time.get_ticks_msec()]
+	unit.name = unit_name
+
 	var world := get_tree().get_root().get_node("World")
 	var unit_path: Node = world.get_node_or_null("Units")
 	if not unit_path:
@@ -91,18 +95,19 @@ func _finish_spawn() -> void:
 	unit_path.add_child(unit)
 
 	if multiplayer.multiplayer_peer != null and pending_scene:
-		_rpc_spawn_unit.rpc(pending_scene.resource_path, unit.position, owner_id)
+		_rpc_spawn_unit.rpc(pending_scene.resource_path, unit.position, owner_id, unit_name)
 
 	if world.has_method("get_units"):
 		world.get_units()
 	print("Юнит создан!")
 
 @rpc("any_peer", "reliable")
-func _rpc_spawn_unit(scene_path: String, pos: Vector2, o_id: int) -> void:
+func _rpc_spawn_unit(scene_path: String, pos: Vector2, o_id: int, unit_name: String) -> void:
 	var scene: PackedScene = load(scene_path)
 	if not scene:
 		return
 	var unit = scene.instantiate()
+	unit.name = unit_name  # то же имя что и на машине-отправителе → RPC пути совпадут
 	unit.position = pos
 	if "owner_id" in unit:
 		unit.owner_id = o_id

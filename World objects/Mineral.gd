@@ -19,8 +19,7 @@ func _ready():
 	timer.one_shot = false
 
 func _process(_delta):
-	# Только сервер обновляет bar.value — MultiplayerSynchronizer доставит клиенту
-	if multiplayer.is_server():
+	if multiplayer.multiplayer_peer == null or multiplayer.is_server():
 		bar.value = current_minerals
 
 # Вызывается строителем когда начинает копать

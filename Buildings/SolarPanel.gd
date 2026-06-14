@@ -46,4 +46,11 @@ func _energy_collected() -> void:
 func take_damage(amount: float) -> void:
 	health -= amount
 	if health <= 0:
-		queue_free()
+		if multiplayer.multiplayer_peer != null:
+			_destroy_synced.rpc()
+		else:
+			queue_free()
+
+@rpc("any_peer", "call_local", "reliable")
+func _destroy_synced() -> void:
+	queue_free()

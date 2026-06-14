@@ -34,6 +34,7 @@ var canvas: MinimapCanvas
 var buildings_container: Node
 var trees_container: Node
 var minerals_container: Node
+var _player_units_count := -1
 
 func _ready() -> void:
 	render_target_clear_mode = SubViewport.CLEAR_MODE_ALWAYS
@@ -67,14 +68,16 @@ func _ready() -> void:
 	collect_static_objects()
 
 func collect_static_objects() -> void:
+	if not is_inside_tree():
+		return
 	canvas.static_objects.clear()
 
-	if buildings_container:
-		for b in buildings_container.get_children():
-			if is_instance_valid(b) and b is Node2D:
-				canvas.static_objects.append({"node": b, "color": Color(0.3, 0.5, 1.0), "size": Vector2(9, 9)})
-				if not b.tree_exiting.is_connected(_on_object_removed):
-					b.tree_exiting.connect(_on_object_removed)
+	# Здания из группы — работает и в одиночной игре, и в мультиплеере
+	for b in get_tree().get_nodes_in_group("player_units"):
+		if is_instance_valid(b) and b is Node2D:
+			canvas.static_objects.append({"node": b, "color": Color(0.3, 0.5, 1.0), "size": Vector2(9, 9)})
+			if not b.tree_exiting.is_connected(_on_object_removed):
+				b.tree_exiting.connect(_on_object_removed)
 
 	if trees_container:
 		for t in trees_container.get_children():
@@ -118,15 +121,29 @@ func _recalculate_offset() -> void:
 	canvas.world_offset = vp * 0.5 - world_center * canvas.map_scale
 
 func _process(_delta: float) -> void:
+	if not is_inside_tree():
+		return
+	# Перестраиваем статику при появлении/исчезновении зданий
+	var pu_count := get_tree().get_nodes_in_group("player_units").size()
+	if pu_count != _player_units_count:
+		_player_units_count = pu_count
+		collect_static_objects()
+
+	var local_id := 1 if (multiplayer.multiplayer_peer == null or multiplayer.is_server()) \
+		else multiplayer.get_unique_id()
+
 	canvas.dynamic_objects.clear()
 	for unit in get_tree().get_nodes_in_group("units"):
-		if is_instance_valid(unit) and unit is Node2D and not unit.is_queued_for_deletion():
-			canvas.dynamic_objects.append(
-				{"node": unit, "color": Color(0.3, 0.6, 1.0), "radius": 5.0})
+		if not is_instance_valid(unit) or unit.is_queued_for_deletion():
+			continue
+		var u_owner = unit.get("owner_id")
+		var color := Color(0.3, 0.6, 1.0) if (u_owner == null or u_owner == local_id) \
+			else Color(1.0, 0.2, 0.2)
+		canvas.dynamic_objects.append({"node": unit, "color": color, "radius": 5.0})
 	for unit in get_tree().get_nodes_in_group("enemies"):
 		if is_instance_valid(unit) and unit is Node2D and not unit.is_queued_for_deletion():
-			canvas.dynamic_objects.append(
-				{"node": unit, "color": Color(1.0, 0.2, 0.2), "radius": 5.0})
+			canvas.dynamic_objects.append({"node": unit, "color": Color(1.0, 0.2, 0.2), "radius": 5.0})
+
 	canvas.static_objects = canvas.static_objects.filter(
 		func(o): return is_instance_valid(o["node"]))
 	canvas.queue_redraw()
