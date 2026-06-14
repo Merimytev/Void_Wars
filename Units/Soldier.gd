@@ -17,6 +17,9 @@ var is_moving := false
 # 1 = хост; клиентские юниты получают peer ID клиента (задаётся фабрикой до _ready)
 var owner_id: int = 1
 
+var _sync_timer := 0.0
+const _SYNC_INTERVAL := 0.1
+
 # ═══ Узлы ════════════════════════════════════════════════════════
 @onready var box = $Box
 @onready var health_bar = $Healthbar
@@ -45,6 +48,9 @@ func _ready():
 
 	update_health_bar()
 
+	if multiplayer.multiplayer_peer != null:
+		set_multiplayer_authority(owner_id)
+
 # ─── Выделение ────────────────────────────────────────────────────
 
 func set_selected(value: bool) -> void:
@@ -53,10 +59,22 @@ func set_selected(value: bool) -> void:
 
 # ─── Физика ───────────────────────────────────────────────────────
 
-func _physics_process(_delta):
+func _physics_process(delta: float) -> void:
+	if multiplayer.multiplayer_peer != null and not is_multiplayer_authority():
+		return
 	_update_movement()
 	move_and_slide()
 	_shooting()
+	if multiplayer.multiplayer_peer != null:
+		_sync_timer += delta
+		if _sync_timer >= _SYNC_INTERVAL:
+			_sync_timer = 0.0
+			_sync_position.rpc(global_position)
+
+@rpc("any_peer", "unreliable")
+func _sync_position(pos: Vector2) -> void:
+	if not is_multiplayer_authority():
+		global_position = pos
 
 func _update_movement() -> void:
 	if not is_moving:

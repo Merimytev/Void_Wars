@@ -61,13 +61,22 @@ func _on_timer_timeout() -> void:
 		timer.stop()
 		return
 
-	var mined: int = mini(minerals_per_tick * mining_unit_ids.size(), current_minerals)
-	current_minerals -= mined
-	Game.Minerals += mined
-	Game.minerals_send += mined
+	for peer_id in mining_unit_ids:
+		if current_minerals <= 0:
+			break
+		var amount := mini(minerals_per_tick, current_minerals)
+		current_minerals -= amount
+		if multiplayer.multiplayer_peer == null or peer_id == 1:
+			Game.minerals_send += amount
+		else:
+			_give_minerals_to_peer.rpc_id(peer_id, amount)
 
 	if current_minerals <= 0:
 		_depleted()
+
+@rpc("authority", "reliable")
+func _give_minerals_to_peer(amount: int) -> void:
+	Game.minerals_send += amount
 
 func _depleted() -> void:
 	timer.stop()
