@@ -67,22 +67,13 @@ text = "Одиночная игра"
 [node name="Gap2" type="Control" parent="CenterContainer/VBoxContainer" unique_id=787826170]
 layout_mode = 2
 
-[node name="LoadButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1088602030]
-custom_minimum_size = Vector2(360, 52)
-layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "Загрузить игру (X)"
-
-[node name="Gap3" type="Control" parent="CenterContainer/VBoxContainer" unique_id=1510692831]
-layout_mode = 2
-
 [node name="NetworkButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=327113627]
 custom_minimum_size = Vector2(360, 52)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-text = "Сетевая игра (~)"
+text = "Сетевая игра"
 
-[node name="Gap4" type="Control" parent="CenterContainer/VBoxContainer" unique_id=2126780206]
+[node name="Gap3" type="Control" parent="CenterContainer/VBoxContainer" unique_id=2126780206]
 layout_mode = 2
 
 [node name="SettingsButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=343889554]
@@ -91,7 +82,7 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Настройки"
 
-[node name="Gap5" type="Control" parent="CenterContainer/VBoxContainer" unique_id=399013090]
+[node name="Gap4" type="Control" parent="CenterContainer/VBoxContainer" unique_id=399013090]
 layout_mode = 2
 
 [node name="StatsButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1701974246]
@@ -100,7 +91,7 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Статистика игроков"
 
-[node name="Gap6" type="Control" parent="CenterContainer/VBoxContainer" unique_id=673930313]
+[node name="Gap5" type="Control" parent="CenterContainer/VBoxContainer" unique_id=673930313]
 layout_mode = 2
 
 [node name="AboutButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=113087984]
@@ -108,7 +99,7 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Об игре"
 
-[node name="Gap7" type="Control" parent="CenterContainer/VBoxContainer" unique_id=100602308]
+[node name="Gap6" type="Control" parent="CenterContainer/VBoxContainer" unique_id=100602308]
 layout_mode = 2
 
 [node name="QuitButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1143757734]
@@ -128,7 +119,6 @@ horizontal_alignment = 1
 uppercase = true
 
 [connection signal="pressed" from="CenterContainer/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
-[connection signal="pressed" from="CenterContainer/VBoxContainer/LoadButton" to="." method="_on_load_button_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/NetworkButton" to="." method="_on_network_button_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/StatsButton" to="." method="_on_stats_button_pressed"]
