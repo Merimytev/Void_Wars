@@ -32,3 +32,10 @@ func _flash_label(label: Label) -> void:
 func _on_menu_pressed() -> void:
 	print("Игрок вышел из игры без отправки данных")
 	get_tree().change_scene_to_file("res://MainMenu.tscn")
+
+
+func _on_pause_pressed() -> void:
+	if (get_tree().paused == false):
+		get_tree().paused = true
+	else:
+		get_tree().paused = false

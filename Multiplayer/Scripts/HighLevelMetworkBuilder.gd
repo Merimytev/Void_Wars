@@ -34,9 +34,7 @@ func _enter_tree() -> void:
 	# authority уже выставлен фабрикой до add_child — не перетираем.
 
 func _ready():
-	var id := name.to_int()
-	if id > 0:
-		owner_id = id  # спавн через MultiplayerSpawner: имя == peer ID
+	owner_id = get_multiplayer_authority()
 	set_selected(selected)
 	add_to_group("units", true)
 	add_to_group("builders", true)

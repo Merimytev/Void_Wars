@@ -25,6 +25,7 @@ func _spawn_from_data(data: Dictionary) -> Node:
 	var player: Node = scene.instantiate()
 	player.name = str(data["id"])
 	player.position = data["pos"]
+	player.set_multiplayer_authority(data["id"])
 	return player
 
 func spawn_player(id: int) -> void:

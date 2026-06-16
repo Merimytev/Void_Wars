@@ -2,6 +2,8 @@ extends Node2D
 
 @export var factory_scene: PackedScene
 @export var turret_scene: PackedScene
+@export var factory_scene_client: PackedScene
+@export var turret_scene_client: PackedScene
 @export var factory_cost_minerals := 50
 @export var factory_cost_energy := 30
 @export var turret_cost_minerals := 25
@@ -79,13 +81,14 @@ func _input(event):
 		queue_free()
 
 func _place_building() -> void:
+	var is_client := multiplayer.multiplayer_peer != null and not multiplayer.is_server()
 	match building_type:
 		"factory":
-			pending_scene = factory_scene
+			pending_scene = factory_scene_client if (is_client and factory_scene_client) else factory_scene
 			pending_mineral_cost = factory_cost_minerals
 			pending_energy_cost = factory_cost_energy
 		"turret":
-			pending_scene = turret_scene
+			pending_scene = turret_scene_client if (is_client and turret_scene_client) else turret_scene
 			pending_mineral_cost = turret_cost_minerals
 			pending_energy_cost = turret_cost_energy
 
@@ -139,6 +142,14 @@ func _start_construction() -> void:
 	print("_start_construction вызван!")
 
 	var ghost = pending_scene.instantiate()
+
+	# Передаём владельца до входа в дерево
+	if is_instance_valid(builder_ref) and "owner_id" in builder_ref:
+		if "owner_id" in ghost:
+			ghost.owner_id = builder_ref.owner_id
+		if multiplayer.multiplayer_peer != null:
+			ghost.set_multiplayer_authority(builder_ref.owner_id)
+
 	var buildings_node: Node = get_tree().get_root().get_node_or_null(
 		"World/NavigationRegion2D/Buildings")
 	if not buildings_node:

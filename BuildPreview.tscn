@@ -4,11 +4,15 @@
 [ext_resource type="PackedScene" uid="uid://bf3b4l314uo5" path="res://Buildings/Factory.tscn" id="2_ffis0"]
 [ext_resource type="Texture2D" uid="uid://b2qe7mfhsthni" path="res://img/FactoryBlue.png" id="3_cbbdn"]
 [ext_resource type="PackedScene" uid="uid://bvgpipxsk31dx" path="res://Buildings/SolarPanel.tscn" id="3_ffis0"]
+[ext_resource type="PackedScene" uid="uid://cw0q0amquu33r" path="res://Multiplayer/Scenes/FactoryClient.tscn" id="4_client"]
+[ext_resource type="PackedScene" uid="uid://dh5vvxu5334gb" path="res://Multiplayer/Scenes/SolarPanelClient.tscn" id="5_client"]
 
 [node name="build_preview" type="Node2D" unique_id=923004103]
 script = ExtResource("1_db443")
 factory_scene = ExtResource("2_ffis0")
 turret_scene = ExtResource("3_ffis0")
+factory_scene_client = ExtResource("4_client")
+turret_scene_client = ExtResource("5_client")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1360611532]
 
