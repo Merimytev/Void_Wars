@@ -39,6 +39,7 @@ func sync_spawn_unit(scene_path: String, parent_rel_path: String, pos: Vector2, 
 	unit.position = pos
 	if "owner_id" in unit:
 		unit.owner_id = o_id
+	unit.set_multiplayer_authority(o_id)
 	var parent: Node = get_tree().get_root().get_node_or_null(parent_rel_path)
 	if not parent:
 		parent = get_tree().get_root().get_node("World")

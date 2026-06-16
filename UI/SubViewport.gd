@@ -146,4 +146,15 @@ func _process(_delta: float) -> void:
 
 	canvas.static_objects = canvas.static_objects.filter(
 		func(o): return is_instance_valid(o["node"]))
+
+	# Перекрашиваем здания каждый кадр — collect_static_objects всегда ставит синий
+	for obj in canvas.static_objects:
+		var node = obj["node"]
+		if not is_instance_valid(node):
+			continue
+		var u_owner = node.get("owner_id")
+		if u_owner != null:
+			obj["color"] = Color(0.3, 0.5, 1.0) if u_owner == local_id \
+				else Color(1.0, 0.3, 0.3)
+
 	canvas.queue_redraw()

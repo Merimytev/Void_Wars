@@ -88,9 +88,12 @@ func _finish_spawn() -> void:
 	unit.name = unit_name
 
 	if multiplayer.multiplayer_peer != null and not multiplayer.is_server():
-		# Клиент: сервер спавнит первым, чтобы путь совпал на обеих машинах
 		_request_spawn.rpc_id(1, pending_scene.resource_path, unit.position, owner_id, unit_name)
 		return
+
+	# Authority до add_child — MultiplayerSynchronizer регистрируется с правильным владельцем
+	if multiplayer.multiplayer_peer != null:
+		unit.set_multiplayer_authority(owner_id)
 
 	var world := get_tree().get_root().get_node("World")
 	var unit_path: Node = world.get_node_or_null("Units")
@@ -119,6 +122,7 @@ func _request_spawn(scene_path: String, pos: Vector2, o_id: int, unit_name: Stri
 	unit.position = pos
 	if "owner_id" in unit:
 		unit.owner_id = o_id
+	unit.set_multiplayer_authority(o_id)
 	var world := get_tree().get_root().get_node("World")
 	var unit_path: Node = world.get_node_or_null("Units")
 	if not unit_path:
