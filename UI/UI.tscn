@@ -165,16 +165,19 @@ grow_vertical = 0
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -611.0
-offset_top = 4.0
-offset_right = -3.0
-offset_bottom = 54.0
+offset_left = -575.0
+offset_top = 6.0
+offset_right = 33.0
+offset_bottom = 162.0
 grow_horizontal = 0
 theme_override_colors/font_color = Color(0.75, 0.85, 1, 1)
 theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("4_mquok")
 theme_override_font_sizes/font_size = 34
-text = "Цель: Уничтожить базу противника"
+text = "Цели: 
+Уничтожить базу противника
+Не потерять главное здание"
+horizontal_alignment = 1
 
 [connection signal="pressed" from="Menu/Menu" to="." method="_on_menu_pressed"]
 [connection signal="pressed" from="Pause/Pause" to="." method="_on_pause_pressed"]
