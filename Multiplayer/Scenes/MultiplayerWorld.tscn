@@ -137,25 +137,38 @@ y_sort_enabled = true
 position = Vector2(-1541, 925)
 
 [node name="MultiplayerMineral2" parent="Objects" unique_id=360416457 instance=ExtResource("9_150dk")]
-position = Vector2(-1106, 935)
+position = Vector2(681, 103.999985)
+rotation = 0.00030182413
 
 [node name="MultiplayerMineral3" parent="Objects" unique_id=1434897436 instance=ExtResource("9_150dk")]
-position = Vector2(-1607, 487)
+position = Vector2(-215, -208)
 
 [node name="MultiplayerMineral4" parent="Objects" unique_id=705637389 instance=ExtResource("9_150dk")]
 position = Vector2(-1346, 795)
 
 [node name="MultiplayerMineral5" parent="Objects" unique_id=991860394 instance=ExtResource("9_150dk")]
-position = Vector2(1689, -512)
+position = Vector2(689, 248)
 
 [node name="MultiplayerMineral6" parent="Objects" unique_id=746220647 instance=ExtResource("9_150dk")]
 position = Vector2(2169, -328)
 
 [node name="MultiplayerMineral7" parent="Objects" unique_id=442606015 instance=ExtResource("9_150dk")]
-position = Vector2(2190, -64)
+position = Vector2(-79, -280)
 
 [node name="MultiplayerMineral8" parent="Objects" unique_id=1211084704 instance=ExtResource("9_150dk")]
 position = Vector2(1950, -204)
+
+[node name="MultiplayerMineral9" parent="Objects" unique_id=298683241 instance=ExtResource("9_150dk")]
+position = Vector2(641, 304)
+
+[node name="MultiplayerMineral10" parent="Objects" unique_id=1024587382 instance=ExtResource("9_150dk")]
+position = Vector2(657, 184)
+
+[node name="MultiplayerMineral11" parent="Objects" unique_id=966584518 instance=ExtResource("9_150dk")]
+position = Vector2(-135, -208)
+
+[node name="MultiplayerMineral12" parent="Objects" unique_id=121658658 instance=ExtResource("9_150dk")]
+position = Vector2(-199, -136)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=775227512]
 navigation_polygon = SubResource("NavigationPolygon_hiqwa")

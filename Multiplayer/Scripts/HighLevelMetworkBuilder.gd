@@ -42,6 +42,8 @@ func _ready():
 	navigation_agent.path_desired_distance = 10.0
 	navigation_agent.target_desired_distance = 10.0
 	update_health_bar()
+	if owner_id != 1:
+		builder_sprite.modulate = Color(0.167, 0.472, 0.077, 1.0)
 	if is_multiplayer_authority():
 		var camera := get_viewport().get_camera_2d()
 		if camera:
@@ -215,8 +217,22 @@ func take_damage(damage):
 	hp -= damage
 	update_health_bar()
 	if hp <= 0:
-		_stop_mining()
-		queue_free()
+		if multiplayer.multiplayer_peer != null:
+			_rpc_die.rpc()
+		else:
+			_stop_mining()
+			queue_free()
+
+@rpc("any_peer", "call_local", "reliable")
+func _rpc_die() -> void:
+	if multiplayer.multiplayer_peer != null:
+		var my_owner: int = 1 if multiplayer.is_server() else multiplayer.get_unique_id()
+		var dying_is_enemy := (my_owner == 1 and owner_id != 1) \
+			or (my_owner != 1 and owner_id == 1)
+		if dying_is_enemy:
+			Game.killed_count += 1
+	_stop_mining()
+	queue_free()
 
 func update_health_bar():
 	health_bar.max_value = max_hp

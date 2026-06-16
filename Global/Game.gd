@@ -48,6 +48,26 @@ func sync_spawn_unit(scene_path: String, parent_rel_path: String, pos: Vector2, 
 	if world and world.has_method("get_units"):
 		world.get_units()
 
+@rpc("any_peer", "reliable")
+func request_sync_building(
+		scene_path: String, parent_rel_path: String,
+		pos: Vector2, o_id: int, bld_name: String) -> void:
+	if not multiplayer.is_server():
+		return
+	var scene: PackedScene = load(scene_path)
+	if not scene:
+		return
+	var bld = scene.instantiate()
+	bld.name = bld_name
+	bld.position = pos
+	if "owner_id" in bld:
+		bld.owner_id = o_id
+	bld.set_multiplayer_authority(o_id)
+	var parent := get_tree().get_root().get_node_or_null(parent_rel_path)
+	if not parent:
+		return
+	parent.add_child(bld)
+
 func spawnUnit(building_position: Vector2) -> void:
 	var path = get_tree().get_root().get_node("World/UI")
 	for child in path.get_children():

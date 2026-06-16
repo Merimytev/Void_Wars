@@ -150,11 +150,23 @@ func _start_construction() -> void:
 		if multiplayer.multiplayer_peer != null:
 			ghost.set_multiplayer_authority(builder_ref.owner_id)
 
+	# Захватываем данные для сетевой синхронизации до queue_free этого узла
+	var bld_o_id: int = builder_ref.get("owner_id") \
+		if is_instance_valid(builder_ref) and "owner_id" in builder_ref else 1
+	var bld_name := "b%d_%d" % [bld_o_id, Time.get_ticks_msec()]
+	var bld_scene_path := pending_scene.resource_path
+	var bld_pos := build_position
+	ghost.name = bld_name  # имя до add_child, чтобы избежать переименования
+
 	var buildings_node: Node = get_tree().get_root().get_node_or_null(
 		"World/NavigationRegion2D/Buildings")
 	if not buildings_node:
 		buildings_node = get_tree().get_root().get_node(
 			"World/NavigationRegion2D2/NavigationRegion2D/Buildings")
+	var bld_parent_path := str(buildings_node.get_path()).substr(6)  # убираем "/root/"
+	var bld_is_server := multiplayer.multiplayer_peer != null and multiplayer.is_server()
+	var bld_is_mp := multiplayer.multiplayer_peer != null
+
 	buildings_node.add_child(ghost)
 	ghost.global_position = build_position
 	ghost.modulate = Color(1, 1, 1, 0.4)
@@ -206,6 +218,14 @@ func _start_construction() -> void:
 				captured_builder.target_queue.clear()
 				captured_builder.target_queue.append(exit_point)
 				captured_builder._go_to_next_target()
+			# Синхронизируем готовое здание второму игроку
+			if bld_is_mp:
+				if bld_is_server:
+					Game.sync_spawn_unit.rpc(
+						bld_scene_path, bld_parent_path, bld_pos, bld_o_id, bld_name)
+				else:
+					Game.request_sync_building.rpc_id(
+						1, bld_scene_path, bld_parent_path, bld_pos, bld_o_id, bld_name)
 	)
 
 	call_deferred("queue_free")

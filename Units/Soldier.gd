@@ -200,6 +200,12 @@ func take_damage(amount: float) -> void:
 
 @rpc("any_peer", "call_local", "reliable")
 func _rpc_die() -> void:
+	if multiplayer.multiplayer_peer != null:
+		var my_owner: int = 1 if multiplayer.is_server() else multiplayer.get_unique_id()
+		var dying_is_enemy := (my_owner == 1 and owner_id != 1) \
+			or (my_owner != 1 and owner_id == 1)
+		if dying_is_enemy:
+			Game.killed_count += 1
 	queue_free()
 
 func update_health_bar() -> void:
