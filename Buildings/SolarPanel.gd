@@ -54,3 +54,7 @@ func take_damage(amount: float) -> void:
 @rpc("any_peer", "call_local", "reliable")
 func _destroy_synced() -> void:
 	queue_free()
+
+@rpc("any_peer", "reliable")
+func take_damage_authority(amount: float) -> void:
+	take_damage(amount)

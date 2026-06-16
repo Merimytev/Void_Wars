@@ -3,7 +3,7 @@ extends MultiplayerSpawner
 # Стартовые позиции по порядку подключения: хост, клиент 1, клиент 2...
 const SPAWN_POSITIONS: Array[Vector2] = [
 	Vector2(-1600, 650),
-	Vector2(2200, 300),
+	Vector2(2200, -256),
 ]
 
 @export var network_player: PackedScene

@@ -17,9 +17,6 @@ var is_moving := false
 # 1 = хост; клиентские юниты получают peer ID клиента (задаётся фабрикой до _ready)
 var owner_id: int = 1
 
-var _sync_timer := 0.0
-const _SYNC_INTERVAL := 0.1
-
 # ═══ Узлы ════════════════════════════════════════════════════════
 @onready var box = $Box
 @onready var health_bar = $Healthbar
@@ -59,22 +56,12 @@ func set_selected(value: bool) -> void:
 
 # ─── Физика ───────────────────────────────────────────────────────
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if multiplayer.multiplayer_peer != null and not is_multiplayer_authority():
 		return
 	_update_movement()
 	move_and_slide()
 	_shooting()
-	if multiplayer.multiplayer_peer != null:
-		_sync_timer += delta
-		if _sync_timer >= _SYNC_INTERVAL:
-			_sync_timer = 0.0
-			_sync_position.rpc(global_position)
-
-@rpc("any_peer", "unreliable")
-func _sync_position(pos: Vector2) -> void:
-	if not is_multiplayer_authority():
-		global_position = pos
 
 func _update_movement() -> void:
 	if not is_moving:
@@ -122,9 +109,26 @@ func _shoot(target_node: Node2D) -> void:
 		var dir = (target_node.global_position - global_position).normalized()
 		if bullet.has_method("init"):
 			bullet.init(dir, damage, owner_id)
+		if multiplayer.multiplayer_peer != null:
+			_rpc_shoot.rpc(global_position, dir)
 		return
 	if target_node.has_method("take_damage"):
 		target_node.take_damage(damage)
+
+# Визуальный снаряд на стороне противника (урон = 0, только отображение)
+@rpc("any_peer", "unreliable")
+func _rpc_shoot(bullet_pos: Vector2, dir: Vector2) -> void:
+	if is_multiplayer_authority() or not bullet_scene:
+		return
+	var bullet = bullet_scene.instantiate()
+	get_tree().current_scene.add_child(bullet)
+	bullet.global_position = bullet_pos
+	if bullet.has_method("init"):
+		bullet.init(dir, 0.0, owner_id)  # damage=0: только визуал, урон считает authority
+
+@rpc("any_peer", "reliable")
+func take_damage_authority(amount: float) -> void:
+	take_damage(amount)
 
 # Возвращает список враждебных узлов в радиусе attack_range,
 # отсортированных по возрастанию расстояния.

@@ -34,18 +34,30 @@ func _physics_process(delta: float) -> void:
 		queue_free()
 
 func _on_body_entered(body: Node) -> void:
-	# Одиночная игра: бьём врагов из группы enemies
 	if body.is_in_group("enemies"):
 		if body.has_method("take_damage"):
-			body.take_damage(damage)
+			_deal_damage(body)
 		queue_free()
 		return
-	# Мультиплеер: бьём узлы противоположной стороны по owner_id
 	var target_owner = body.get("owner_id")
 	if target_owner == null:
 		return
 	var is_enemy: bool = (shooter_owner_id == 1 and target_owner != 1) \
 		or (shooter_owner_id != 1 and target_owner == 1)
 	if is_enemy and body.has_method("take_damage"):
-		body.take_damage(damage)
+		_deal_damage(body)
 		queue_free()
+
+func _deal_damage(body: Node) -> void:
+	if damage <= 0.0:
+		return  # визуальный снаряд — не наносит урон
+	if multiplayer.multiplayer_peer == null:
+		body.take_damage(damage)
+		return
+	var auth := body.get_multiplayer_authority()
+	if auth == multiplayer.get_unique_id():
+		body.take_damage(damage)
+	elif body.has_method("take_damage_authority"):
+		body.rpc_id(auth, "take_damage_authority", damage)
+	else:
+		body.take_damage(damage)
