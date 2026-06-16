@@ -18,7 +18,8 @@ var is_moving := false
 var owner_id: int = 1
 
 var _sync_timer := 0.0
-const _SYNC_INTERVAL := 0.1  # секунд между отправками позиции
+const _SYNC_INTERVAL := 0.1
+var _remote_pos := Vector2.ZERO  # цель интерполяции для не-authority копий
 
 # ═══ Узлы ════════════════════════════════════════════════════════
 @onready var box = $Box
@@ -50,6 +51,7 @@ func _ready():
 
 	if multiplayer.multiplayer_peer != null:
 		set_multiplayer_authority(owner_id)
+		_remote_pos = global_position  # стартуем интерполяцию с реальной позиции спавна
 
 # ─── Выделение ────────────────────────────────────────────────────
 
@@ -61,6 +63,8 @@ func set_selected(value: bool) -> void:
 
 func _physics_process(delta: float) -> void:
 	if multiplayer.multiplayer_peer != null and not is_multiplayer_authority():
+		# Плавная интерполяция к последней полученной позиции
+		global_position = global_position.lerp(_remote_pos, minf(delta * 15.0, 1.0))
 		return
 	_update_movement()
 	move_and_slide()
@@ -74,7 +78,7 @@ func _physics_process(delta: float) -> void:
 @rpc("any_peer", "unreliable")
 func _sync_position(pos: Vector2) -> void:
 	if not is_multiplayer_authority():
-		global_position = pos
+		_remote_pos = pos  # только обновляем цель, позиция сглаживается в _physics_process
 
 func _update_movement() -> void:
 	if not is_moving:
