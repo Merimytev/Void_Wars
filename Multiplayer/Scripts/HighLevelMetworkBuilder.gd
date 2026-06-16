@@ -42,8 +42,6 @@ func _ready():
 	navigation_agent.path_desired_distance = 10.0
 	navigation_agent.target_desired_distance = 10.0
 	update_health_bar()
-	if owner_id != 1:
-		builder_sprite.modulate = Color(0.167, 0.472, 0.077, 1.0)
 	if is_multiplayer_authority():
 		var camera := get_viewport().get_camera_2d()
 		if camera:
