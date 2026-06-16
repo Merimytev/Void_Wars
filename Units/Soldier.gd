@@ -62,6 +62,8 @@ func set_selected(value: bool) -> void:
 # ─── Физика ───────────────────────────────────────────────────────
 
 func _physics_process(delta: float) -> void:
+	if is_queued_for_deletion():
+		return
 	if multiplayer.multiplayer_peer != null and not is_multiplayer_authority():
 		# Плавная интерполяция к последней полученной позиции
 		global_position = global_position.lerp(_remote_pos, minf(delta * 15.0, 1.0))

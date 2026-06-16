@@ -27,10 +27,16 @@ var is_constructing: bool = false
 @onready var health_bar = $Healthbar
 
 func _enter_tree() -> void:
-	set_multiplayer_authority(name.to_int())
+	var id := name.to_int()
+	if id > 0:
+		set_multiplayer_authority(id)
+	# Если имя не является чистым числом (например "u506808478_12345"),
+	# authority уже выставлен фабрикой до add_child — не перетираем.
 
 func _ready():
-	owner_id = name.to_int()  # имя узла = peer ID (задаётся MultiplayerSpawner)
+	var id := name.to_int()
+	if id > 0:
+		owner_id = id  # спавн через MultiplayerSpawner: имя == peer ID
 	set_selected(selected)
 	add_to_group("units", true)
 	add_to_group("builders", true)
