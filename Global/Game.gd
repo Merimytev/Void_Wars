@@ -26,6 +26,27 @@ var minerals_send: int:
 		Minerals = value
 		minerals_changed.emit(value)
 
+# Вызывается сервером — создаёт юнит на клиенте по точному пути родителя
+@rpc("authority", "reliable")
+func sync_spawn_unit(scene_path: String, parent_rel_path: String, pos: Vector2, o_id: int, unit_name: String) -> void:
+	if multiplayer.is_server():
+		return
+	var scene: PackedScene = load(scene_path)
+	if not scene:
+		return
+	var unit = scene.instantiate()
+	unit.name = unit_name
+	unit.position = pos
+	if "owner_id" in unit:
+		unit.owner_id = o_id
+	var parent: Node = get_tree().get_root().get_node_or_null(parent_rel_path)
+	if not parent:
+		parent = get_tree().get_root().get_node("World")
+	parent.add_child(unit)
+	var world := get_tree().get_root().get_node_or_null("World")
+	if world and world.has_method("get_units"):
+		world.get_units()
+
 func spawnUnit(building_position: Vector2) -> void:
 	var path = get_tree().get_root().get_node("World/UI")
 	for child in path.get_children():

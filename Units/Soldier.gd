@@ -174,7 +174,14 @@ func take_damage(amount: float) -> void:
 	hp -= amount
 	update_health_bar()
 	if hp <= 0:
-		queue_free()
+		if multiplayer.multiplayer_peer != null:
+			_rpc_die.rpc()
+		else:
+			queue_free()
+
+@rpc("any_peer", "call_local", "reliable")
+func _rpc_die() -> void:
+	queue_free()
 
 func update_health_bar() -> void:
 	health_bar.max_value = max_hp

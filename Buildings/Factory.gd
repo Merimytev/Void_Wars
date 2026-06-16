@@ -99,9 +99,8 @@ func _finish_spawn() -> void:
 	unit_path.add_child(unit)
 
 	if multiplayer.multiplayer_peer != null:
-		# Сервер отдаёт точный путь родителя — клиент использует ровно тот же
 		var rel_path := str(unit_path.get_path()).substr(6)  # убираем "/root/"
-		_replicate_spawn.rpc(pending_scene.resource_path, rel_path, unit.position, owner_id, unit_name)
+		Game.sync_spawn_unit.rpc(pending_scene.resource_path, rel_path, unit.position, owner_id, unit_name)
 
 	if world.has_method("get_units"):
 		world.get_units()
@@ -126,28 +125,7 @@ func _request_spawn(scene_path: String, pos: Vector2, o_id: int, unit_name: Stri
 		unit_path = world
 	unit_path.add_child(unit)
 	var rel_path := str(unit_path.get_path()).substr(6)
-	_replicate_spawn.rpc(scene_path, rel_path, pos, o_id, unit_name)
-	if world.has_method("get_units"):
-		world.get_units()
-
-# Сервер рассылает клиентам точный путь родителя → MultiplayerSynchronizer видит ноду
-@rpc("authority", "reliable")
-func _replicate_spawn(scene_path: String, parent_rel_path: String, pos: Vector2, o_id: int, unit_name: String) -> void:
-	if multiplayer.is_server():
-		return
-	var scene: PackedScene = load(scene_path)
-	if not scene:
-		return
-	var unit = scene.instantiate()
-	unit.name = unit_name
-	unit.position = pos
-	if "owner_id" in unit:
-		unit.owner_id = o_id
-	var parent: Node = get_tree().get_root().get_node_or_null(parent_rel_path)
-	if not parent:
-		parent = get_tree().get_root().get_node("World")
-	parent.add_child(unit)
-	var world := get_tree().get_root().get_node("World")
+	Game.sync_spawn_unit.rpc(scene_path, rel_path, pos, o_id, unit_name)
 	if world.has_method("get_units"):
 		world.get_units()
 
