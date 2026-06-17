@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cxv5fejk1fxf2" path="res://Enemy.gd" id="1_34t7x"]
 [ext_resource type="Texture2D" uid="uid://db24iexo82umt" path="res://img/Enemy.png" id="2_knsol"]
-[ext_resource type="PackedScene" uid="uid://bo57jt68c3sux" path="res://Bullet.tscn" id="2_mmjhk"]
+[ext_resource type="PackedScene" uid="uid://bo57jt68c3sux" path="res://bullet.tscn" id="2_mmjhk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ov13o"]
 size = Vector2(42, 42)

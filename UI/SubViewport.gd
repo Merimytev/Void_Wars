@@ -113,10 +113,11 @@ func _recalculate_offset() -> void:
 	var world_size := max_pos - min_pos
 	var padding := 20.0
 	var vp := canvas.vp_size
+	var zoom_factor := 0.65  # масштаб
 	canvas.map_scale = min(
 		(vp.x - padding * 2) / max(world_size.x, 1),
 		(vp.y - padding * 2) / max(world_size.y, 1)
-	)
+	) * zoom_factor
 	var world_center := (min_pos + max_pos) * 0.5
 	canvas.world_offset = vp * 0.5 - world_center * canvas.map_scale
 

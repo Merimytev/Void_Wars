@@ -25,8 +25,8 @@ func _ready():
 		push_error("EnemyAI: enemy_base не задан!")
 		return
 
-	wave_timer = wave_interval - 10.0
-	print("EnemyAI: первая волна через 10 секунд")
+	wave_timer = wave_interval - 18.0
+	print("EnemyAI: первая волна через 18 секунд")
 
 func _process(delta: float) -> void:
 	wave_timer += delta

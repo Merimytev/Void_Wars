@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cl5sweqpos2k8"]
 
-[ext_resource type="Script" uid="uid://dyohnq4dsyhl" path="res://World.gd" id="1_1m6ml"]
+[ext_resource type="Script" uid="uid://dyohnq4dsyhl" path="res://world.gd" id="1_1m6ml"]
 [ext_resource type="Script" uid="uid://b60smdf8fypub" path="res://UI/Camera.gd" id="1_mov7x"]
 [ext_resource type="PackedScene" uid="uid://p3snma5hv5o2" path="res://Units/Builder.tscn" id="2_gs7jo"]
 [ext_resource type="Texture2D" uid="uid://dupgkjwewdblv" path="res://img/MainTile.png" id="3_fa184"]
@@ -10,8 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://bf3b4l314uo5" path="res://Buildings/Factory.tscn" id="7_5pqsd"]
 [ext_resource type="PackedScene" uid="uid://bvgpipxsk31dx" path="res://Buildings/SolarPanel.tscn" id="7_gu6r7"]
 [ext_resource type="AudioStream" uid="uid://bdv0sh2ekso8v" path="res://Audio/OSTDynamic.wav" id="9_f3u6j"]
-[ext_resource type="Texture2D" uid="uid://cv2eq6yigfint" path="res://img/TreeBorder2.png" id="9_ikiii"]
-[ext_resource type="Texture2D" uid="uid://ccrna5u5fc8kg" path="res://img/TreeBorder1.png" id="10_cbp6q"]
+[ext_resource type="Texture2D" uid="uid://b4o3lj0s68k3u" path="res://img/TreeBorder2.png" id="9_ikiii"]
+[ext_resource type="Texture2D" uid="uid://bui16xlg5ha4w" path="res://img/TreeBorder1.png" id="10_cbp6q"]
 [ext_resource type="AudioStream" uid="uid://cewmalrtas051" path="res://Audio/OSTAmbient.wav" id="10_wwedx"]
 [ext_resource type="Texture2D" uid="uid://cf8jgcmh3a613" path="res://img/Tree1.png" id="11_biudx"]
 [ext_resource type="Texture2D" uid="uid://c5p3kc83yhxy2" path="res://img/Tree2.png" id="12_xcoiw"]
